@@ -43,4 +43,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation (libs.picasso)
+    // https://mvnrepository.com/artifact/com.github.mvallim/java-fluent-validator
+    implementation("com.github.mvallim:java-fluent-validator:1.9.1")
+    implementation("org.apache.commons:commons-lang3:3.12.0")
 }

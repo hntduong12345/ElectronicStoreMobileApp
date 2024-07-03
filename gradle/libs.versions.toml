@@ -11,6 +11,11 @@ annotation = "1.6.0"
 lifecycleLivedataKtx = "2.8.1"
 lifecycleViewmodelKtx = "2.8.1"
 
+picasso = "2.8"
+retrofit = "2.11.0"
+retrofitgson = "2.11.0"
+fragment = "1.8.0"
+
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
@@ -22,6 +27,13 @@ constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayo
 annotation = { group = "androidx.annotation", name = "annotation", version.ref = "annotation" }
 lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
+
+picasso = { module = "com.squareup.picasso:picasso", version.ref = "picasso" }
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofitgson" }
+fragment = { group = "androidx.fragment", name = "fragment", version.ref = "fragment" }
+
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
