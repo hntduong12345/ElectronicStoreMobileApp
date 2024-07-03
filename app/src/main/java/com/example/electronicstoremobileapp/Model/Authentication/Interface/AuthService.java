@@ -12,9 +12,9 @@ import retrofit2.http.POST;
 
 public interface AuthService {
 
-    @POST("customer/login")
+    @POST("/api/customer/login")
     Call<LoginResponse> Login(@Body Login login);
 
-    @POST("customer/register")
+    @POST("/api/customer/register")
     Call<LoginResponse> Register(@Body SignUp signUp);
 }

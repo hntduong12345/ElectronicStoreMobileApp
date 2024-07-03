@@ -1,27 +1,15 @@
 package com.example.electronicstoremobileapp.Model.Authentication;
 
 public class SignUp {
-    public String Input;
-    public String Password;
+    public String firstName;
+    public String lastName;
+    public String email;
+    public String password;
 
-    public SignUp(String input, String password) {
-        Input = input;
-        Password = password;
-    }
-
-    public String getInput() {
-        return Input;
-    }
-
-    public void setInput(String input) {
-        Input = input;
-    }
-
-    public String getPassword() {
-        return Password;
-    }
-
-    public void setPassword(String password) {
-        Password = password;
+    public SignUp(String firstName, String lastName, String email, String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
     }
 }
