@@ -18,6 +18,7 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        android:usesCleartextTraffic="true"
         android:theme="@style/Theme.ElectronicStoreMobileApp"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
@@ -30,6 +31,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Authentication.AuthenActivity"
+            android:exported="true">
+        </activity>
+        <activity
+            android:name=".admins.MainActivity"
+            android:exported="true">
+
+        </activity>
+
     </application>
 
 </manifest>

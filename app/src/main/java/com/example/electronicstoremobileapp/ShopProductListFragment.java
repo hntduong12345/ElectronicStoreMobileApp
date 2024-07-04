@@ -1,5 +1,6 @@
 package com.example.electronicstoremobileapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import com.example.electronicstoremobileapp.Authentication.AuthenActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,8 +44,6 @@ public class ShopProductListFragment extends Fragment {
     public static ShopProductListFragment newInstance(String param1, String param2) {
         ShopProductListFragment fragment = new ShopProductListFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,7 +59,7 @@ public class ShopProductListFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_shop_product_list, container, false);
     }
