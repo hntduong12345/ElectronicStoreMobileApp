@@ -1,4 +1,4 @@
-package com.example.electronicstoremobileapp.Model.Authentication;
+package com.example.electronicstoremobileapp.models.authentication;
 
 public class SignUp {
     public String firstName;
