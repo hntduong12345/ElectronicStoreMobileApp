@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="admins.ui.products.ProductCreateFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarCreate"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topbar_height"
+        android:background="@color/teal_700"
+        app:navigationIcon="@drawable/baseline_arrow_back_24"
+        android:title="Create"
+        app:layout_constraintStart_toStartOf="parent"
+        app:titleTextColor="@color/white"
+        app:title="Create"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/btnSelectImage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:backgroundTint="@color/teal_700"
+                android:text="Select Image">
+
+            </Button>
+
+            <ImageView
+                android:id="@+id/imgSelectedImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/baseline_plus_one_24"></ImageView>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/edtProductName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="name"
+            android:inputType="text"
+            android:text="" />
+
+        <EditText
+            android:id="@+id/edtDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="description"
+            android:inputType="text"
+            android:text="" />
+
+        <EditText
+            android:id="@+id/edtDefaultPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="default price"
+            android:inputType="numberDecimal|number"
+            android:text="" />
+
+        <Spinner
+            android:id="@+id/dropdownCategories"
+            android:layout_width="match_parent"
+
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:spinnerMode="dropdown">
+
+        </Spinner>
+
+        <EditText
+            android:id="@+id/edtManufacturer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="manufacturer"
+            android:inputType="text"
+            android:text="" />
+
+        <EditText
+            android:id="@+id/edtStorageAmount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="storage amount"
+            android:inputType="number"
+            android:text="Name" />
+
+        <Button
+            android:id="@+id/btnCreateProduct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="0dp"
+            android:backgroundTint="@color/teal_700"
+            android:text="Create" />
+
+        <ScrollView
+            android:id="@+id/scrollViewError"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_margin="20dp"
+            android:layout_marginTop="0dp"
+            android:background="#8E8E8E"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="-127dp">
+
+            <LinearLayout
+                android:id="@+id/scollviewErrorLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

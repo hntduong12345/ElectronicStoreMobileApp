@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="admins.ui.products.ProductListFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/fragmentToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topbar_height"
+        android:title="Product"
+        android:background="@color/teal_700"
+        android:titleTextColor="@color/white"
+        app:title="Product"
+        app:titleTextColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <Spinner
+        android:padding="10dp"
+        android:id="@+id/dropdownCategoriesSelection"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/topbar_height"
+        android:layout_marginTop="@dimen/topbar_height"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </Spinner>
+    <ListView
+        android:id="@+id/fragmentProductListView"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        android:padding="20dp"
+        android:layout_marginTop="@dimen/topbar_height"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/dropdownCategoriesSelection" />
+</androidx.constraintlayout.widget.ConstraintLayout>

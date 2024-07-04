@@ -1,12 +1,17 @@
 package com.example.electronicstoremobileapp.apiClient.accounts;
 
 
+import com.example.electronicstoremobileapp.admins.ui.accounts.models.RegisterAccountModel;
 import com.example.electronicstoremobileapp.models.AccountDto;
 
 import java.util.List;
 
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
+import retrofit2.http.PUT;
+import retrofit2.http.Path;
 
 //@Header("Content-Type:application/json")
 public interface AccountServices {
@@ -26,13 +31,13 @@ public interface AccountServices {
     @GET("api/admin/get-all-customer")
     Call<List<AccountDto>> GetAllCustomer();
 
-//    @POST("api/admin/create-admin")
-//    Call<Void> CreateAdmin(@Body RegisterAccountModel model);
-//
-//    @POST("api/admin/create-staff")
-//    Call<Void> CreateStaff(@Body RegisterAccountModel model);
-//
-//
-//    @PUT("api/admin/change-status/{id}")
-//    Call<Void> Ban(@Path("id") String profileId);
+    @POST("api/admin/create-admin")
+    Call<Void> CreateAdmin(@Body RegisterAccountModel model);
+
+    @POST("api/admin/create-staff")
+    Call<Void> CreateStaff(@Body RegisterAccountModel model);
+
+
+    @PUT("api/admin/change-status/{id}")
+    Call<Void> Ban(@Path("id") String profileId);
 }
