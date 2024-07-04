@@ -16,14 +16,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.electronicstoremobileapp.MainActivity;
-import com.example.electronicstoremobileapp.Utility.UserLoggingUtil;
-import com.example.electronicstoremobileapp.apiClient.ApiClient;
-import com.example.electronicstoremobileapp.apiClient.accounts.AuthService;
-import com.example.electronicstoremobileapp.models.authentication.Login;
-import com.example.electronicstoremobileapp.models.authentication.LoginResponse;
+import com.example.electronicstoremobileapp.Model.Authentication.Interface.AuthService;
+import com.example.electronicstoremobileapp.Model.Authentication.Login;
+import com.example.electronicstoremobileapp.Model.Authentication.LoginResponse;
 import com.example.electronicstoremobileapp.R;
-import com.example.electronicstoremobileapp.Utility.Preference;
+import com.example.electronicstoremobileapp.apiClient.ApiClient;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -142,8 +139,7 @@ public class LoginFragment extends Fragment {
         login = view.findViewById(R.id.buttonSignIn);
         //loginWithGoogle = findViewById(R.id.loginGoogle);
         signup = view.findViewById(R.id.textViewSignUp);
-
-        authService = ApiClient.getServiceClient(AuthService.class);
+        authService = ApiClient.getClient().create(AuthService.class);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
