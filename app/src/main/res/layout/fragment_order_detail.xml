@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.customer_ui.Cart_Order.OrderDetailFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/img_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="100dp"
+            android:src="@drawable/ic_action_back"
+            app:layout_constraintEnd_toStartOf="@+id/textView4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="130dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginEnd="141dp"
+            android:gravity="center"
+            android:text="Order Details"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ScrollView
+            android:layout_width="412dp"
+            android:layout_height="661dp"
+            android:layout_marginTop="9dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <LinearLayout
+                        android:layout_width="412dp"
+                        android:layout_height="117dp"
+                        android:layout_marginTop="16dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="20dp"
+                        android:weightSum="10"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <ImageView
+                            android:id="@+id/imageView12"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:src="@drawable/baseline_location" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="126dp"
+                            android:layout_weight="10"
+                            android:orientation="vertical"
+                            android:paddingLeft="5dp"
+                            android:paddingTop="2dp">
+
+                            <TextView
+                                android:id="@+id/textView22"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Delivery Address"
+                                android:textSize="15dp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/textView23"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="name" />
+
+                            <TextView
+                                android:id="@+id/textView24"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="phone number" />
+
+                            <TextView
+                                android:id="@+id/textView25"
+                                android:layout_width="360dp"
+                                android:layout_height="wrap_content"
+                                android:text="address" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <ListView
+                        android:id="@+id/listView"
+                        android:layout_width="412dp"
+                        android:layout_height="268dp"
+                        android:layout_marginTop="144dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="412dp"
+                        android:layout_height="248dp"
+                        android:orientation="vertical"
+                        android:weightSum="4"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/listView">
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout7"
+                            android:layout_width="378dp"
+                            android:layout_height="19dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="18dp"
+                            android:orientation="horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout6">
+
+                            <TextView
+                                android:id="@+id/textView32"
+                                android:layout_width="103dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Voucher" />
+
+                            <TextView
+                                android:id="@+id/txt_voucherDiscount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="total price"
+                                android:textAlignment="textEnd"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout2"
+                            android:layout_width="378dp"
+                            android:layout_height="19dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="18dp"
+                            android:orientation="horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <TextView
+                                android:id="@+id/textView29"
+                                android:layout_width="208dp"
+                                android:layout_height="wrap_content"
+                                android:text="Total Product Price" />
+
+                            <TextView
+                                android:id="@+id/txt_totalProductPrice"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="total price"
+                                android:textAlignment="textEnd"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLayout6"
+                            android:layout_width="378dp"
+                            android:layout_height="19dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="18dp"
+                            android:orientation="horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+                            <TextView
+                                android:id="@+id/textView31"
+                                android:layout_width="103dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Delivery Fee" />
+
+                            <TextView
+                                android:id="@+id/txt_deliveryFee"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="total price"
+                                android:textAlignment="textEnd"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="378dp"
+                            android:layout_height="19dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="18dp"
+                            android:orientation="horizontal"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.0"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+
+                            <TextView
+                                android:id="@+id/textView33"
+                                android:layout_width="103dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Total"
+                                android:textStyle="bold"/>
+
+                            <TextView
+                                android:id="@+id/txt_totalAmount"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="total price"
+                                android:textAlignment="textEnd"
+                                android:textStyle="bold" />
+                        </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
