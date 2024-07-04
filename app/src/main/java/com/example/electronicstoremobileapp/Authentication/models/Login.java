@@ -1,4 +1,4 @@
-package com.example.electronicstoremobileapp.models.authentication;
+package com.example.electronicstoremobileapp.Authentication.models;
 
 public class Login {
     public String input;

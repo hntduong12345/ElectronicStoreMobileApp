@@ -2,9 +2,9 @@ package com.example.electronicstoremobileapp.apiClient.accounts;
 
 
 
-import com.example.electronicstoremobileapp.models.authentication.Login;
-import com.example.electronicstoremobileapp.models.authentication.LoginResponse;
-import com.example.electronicstoremobileapp.models.authentication.SignUp;
+import com.example.electronicstoremobileapp.Authentication.models.Login;
+import com.example.electronicstoremobileapp.Authentication.models.LoginResponse;
+import com.example.electronicstoremobileapp.Authentication.models.SignUp;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

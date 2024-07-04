@@ -12,8 +12,6 @@ import java.util.Date;
 public class VoucherDto implements Parcelable {
     @SerializedName("voucherId")
     public String VoucherId;
-    @SerializedName("totalPrice")
-    public float TotalPrice;
     @SerializedName("account")
     public AccountDto Account;
     @SerializedName("voucherCode")
@@ -22,26 +20,18 @@ public class VoucherDto implements Parcelable {
     public String ExpiryDate;
     @SerializedName("createdDate")
     public String CreatedDate;
-    @SerializedName("type")
-    public String Type;
     @SerializedName("percentage")
     public float Percentage;
-    @SerializedName("moneyThreshold")
-    public float MoneyThreshold;
-
     @SerializedName("isAvailable")
     public boolean IsAvailable;
 
-    public VoucherDto(String voucherId, float totalPrice, AccountDto account, String voucherCode, String expiryDate, String createdDate, String type, float percentage, float moneyThreshold, boolean isAvailable) {
+    public VoucherDto(String voucherId, float totalPrice, AccountDto account, String voucherCode, String expiryDate, String createdDate, float percentage, float moneyThreshold, boolean isAvailable) {
         VoucherId = voucherId;
-        TotalPrice = totalPrice;
         Account = account;
         VoucherCode = voucherCode;
         ExpiryDate = expiryDate;
         CreatedDate = createdDate;
-        Type = type;
         Percentage = percentage;
-        MoneyThreshold = moneyThreshold;
         IsAvailable = isAvailable;
     }
     @Override
@@ -52,27 +42,21 @@ public class VoucherDto implements Parcelable {
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
         dest.writeString(VoucherId);
-        dest.writeFloat(TotalPrice);
         dest.writeTypedObject(Account,PARCELABLE_WRITE_RETURN_VALUE);
         dest.writeString(VoucherCode);
         dest.writeString(ExpiryDate);
         dest.writeString(CreatedDate);
-        dest.writeString(Type);
         dest.writeFloat(Percentage);
-        dest.writeFloat(MoneyThreshold);
         dest.writeBoolean(IsAvailable);
     }
 
     protected VoucherDto(Parcel in) {
         VoucherId = in.readString();
-        TotalPrice = in.readFloat();
         Account = in.readTypedObject(AccountDto.CREATOR);
         VoucherCode = in.readString();
         ExpiryDate = in.readString();
         CreatedDate = in.readString();
-        Type = in.readString();
         Percentage = in.readFloat();
-        MoneyThreshold = in.readFloat();
         IsAvailable = in.readBoolean();
     }
 

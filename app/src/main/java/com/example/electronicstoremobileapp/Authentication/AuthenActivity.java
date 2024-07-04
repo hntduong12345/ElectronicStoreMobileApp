@@ -14,7 +14,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.auth0.android.jwt.JWT;
-import com.example.electronicstoremobileapp.CustomerProfileFragment;
 import com.example.electronicstoremobileapp.MainActivity;
 import com.example.electronicstoremobileapp.R;
 import com.example.electronicstoremobileapp.Utility.JwtUtil;

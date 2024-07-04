@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@+id/navigation_voucher_list"
+    android:id="@+id/admin_view_navigation">
+    <fragment
+        android:id="@+id/navigation_voucher"
+        android:name="com.example.electronicstoremobileapp.admins.ui.vouchers.VoucherFragment"
+        android:label="@string/title_voucher"
+        tools:layout="@layout/fragment_admin_voucher">
+        <action
+            android:id="@+id/action_navigation_voucher_to_navigation_voucher_list"
+            app:destination="@id/navigation_voucher_list" />
+
+
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_voucher_update"
+        android:name="com.example.electronicstoremobileapp.admins.ui.vouchers.VoucherUpdateFragment"
+        android:label="@string/title_voucher"
+        tools:layout="@layout/fragment_admin_voucher_update">
+
+        <action
+            android:id="@+id/action_navigation_voucher_update_to_navigation_voucher"
+            app:destination="@id/navigation_voucher" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_voucher_list"
+        android:name="com.example.electronicstoremobileapp.admins.ui.vouchers.VoucherListFragment"
+        android:label="@string/title_voucher"
+        tools:layout="@layout/fragment_admin_voucher_list">
+        <action
+            android:id="@+id/action_navigation_voucher_list_to_navigation_voucher_create"
+            app:destination="@id/navigation_voucher_create" />
+        <action
+            android:id="@+id/action_navigation_voucher_list_to_navigation_voucher_update"
+            app:destination="@id/navigation_voucher_update" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_voucher_create"
+        android:name="com.example.electronicstoremobileapp.admins.ui.vouchers.VoucherCreateFragment"
+        tools:layout="@layout/fragment_admin_voucher_create">
+        <action
+            android:id="@+id/action_navigation_voucher_create_to_navigation_voucher"
+            app:destination="@id/navigation_voucher" />
+    </fragment>
+</navigation>
