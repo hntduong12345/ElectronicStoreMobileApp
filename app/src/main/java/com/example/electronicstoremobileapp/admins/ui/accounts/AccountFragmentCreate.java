@@ -60,7 +60,7 @@ public class AccountFragmentCreate extends Fragment {
         }
         roleSelectionList = new ArrayList<>();
         roleSelectionList.add(AppConstant.ADMIN_ROLE);
-        roleSelectionList.add(AppConstant.STAFF_ROLE);
+        //roleSelectionList.add(AppConstant.STAFF_ROLE);
     }
 
     @Override
@@ -187,9 +187,11 @@ public class AccountFragmentCreate extends Fragment {
         String getSelectedRole = (String) dropdownRoleSelect.getSelectedItem();
         if (getSelectedRole.equals(AppConstant.ADMIN_ROLE)) {
             createMethod = ApiClient.getServiceClient(AccountServices.class).CreateAdmin(accountToCreate);
-        } else if (getSelectedRole.equals(AppConstant.STAFF_ROLE)) {
-            createMethod = ApiClient.getServiceClient(AccountServices.class).CreateStaff(accountToCreate);
-        } else {
+        }
+//        else if (getSelectedRole.equals(AppConstant.STAFF_ROLE)) {
+//            createMethod = ApiClient.getServiceClient(AccountServices.class).CreateStaff(accountToCreate);
+//        }
+        else {
             Toast.makeText(getParentFragment().getContext(), "cannot find role to create", Toast.LENGTH_SHORT);
             return;
         }
@@ -202,6 +204,8 @@ public class AccountFragmentCreate extends Fragment {
                     getNavController().navigate(R.id.action_navigation_account_create_to_navigation_account);
                 } else {
                     Log.e("CREATE ERROR", "cannot create, error bad request or other");
+                    Toast.makeText(getContext(), "create fail, unknown error", Toast.LENGTH_LONG);
+
                 }
             }
 

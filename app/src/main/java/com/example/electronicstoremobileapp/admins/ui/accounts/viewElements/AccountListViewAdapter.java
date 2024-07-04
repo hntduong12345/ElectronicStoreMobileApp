@@ -9,15 +9,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.navigation.fragment.NavHostFragment;
 
 
+import com.example.electronicstoremobileapp.AppConstant;
 import com.example.electronicstoremobileapp.Helpers;
 import com.example.electronicstoremobileapp.R;
 import com.example.electronicstoremobileapp.databinding.ListviewitemAdminAccountListItemBinding;
 import com.example.electronicstoremobileapp.models.AccountDto;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.List;
 
@@ -74,6 +78,13 @@ public class AccountListViewAdapter extends BaseAdapter {
         //binding.txtPhonenumber.setText(Helpers.returnEmptyStringOrValue(getAccount.PhoneNumber));
 
         //binding.imgProductImage.setImageURI(Uri.parse(getProduct.RelativeUrl));
+        if (StringUtils.compareIgnoreCase(AppConstant.ADMIN_ROLE, getAccount.Role) != 0) {
+            binding.btnDeleteProduct.setEnabled(false);
+            binding.btnDeleteProduct.setImageDrawable(null);
+        }else{
+            binding.btnDeleteProduct.setEnabled(true);
+            binding.btnDeleteProduct.setImageDrawable(parentContext.getDrawable(R.drawable.baseline_delete_24));
+        }
         binding.btnUpdateProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,6 +102,8 @@ public class AccountListViewAdapter extends BaseAdapter {
                 // Set up the buttons
                 Button cancelButton = dialogView.findViewById(R.id.btnCancel);
                 Button deleteButton = dialogView.findViewById(R.id.btnDelete);
+                TextView accountId = dialogView.findViewById(R.id.txtAccountId);
+                accountId.setText(getAccount.Email);
                 // Create and show the dialog
                 final AlertDialog dialog = builder.create();
                 cancelButton.setOnClickListener(new View.OnClickListener() {

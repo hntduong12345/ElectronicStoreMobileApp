@@ -10,8 +10,6 @@ public class UpdateProductDto {
     public String CategoryId;
     public String Manufacturer;
     public int StorageAmount;
-    public boolean IsOnSale;
-    public Date SaleEndDate;
     public File ImageFile;
 
 }

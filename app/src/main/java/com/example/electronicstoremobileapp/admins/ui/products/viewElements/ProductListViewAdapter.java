@@ -1,12 +1,18 @@
 package com.example.electronicstoremobileapp.admins.ui.products.viewElements;
 
+import static com.example.electronicstoremobileapp.AppConstant.TOBE_UPDATE_OBJECT_KEY;
+
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.electronicstoremobileapp.R;
 import com.example.electronicstoremobileapp.databinding.ListviewitemAdminProductListItemBinding;
@@ -21,12 +27,13 @@ public class ProductListViewAdapter extends BaseAdapter {
     List<ProductDto> productLists;
     int layoutId;
     LayoutInflater layoutInflater;
-
-    public ProductListViewAdapter(Context parentContext, List<ProductDto> productLists, int layoutId) {
+    NavHostFragment parentNavigationFragment;
+    public ProductListViewAdapter(Context parentContext, List<ProductDto> productLists, int layoutId, NavHostFragment parentNavigationFragment) {
         this.parentContext = parentContext;
         this.productLists = productLists;
         this.layoutId = layoutId;
         this.layoutInflater = LayoutInflater.from(parentContext);
+        this.parentNavigationFragment = parentNavigationFragment;
     }
 
     @Override
@@ -73,9 +80,12 @@ public class ProductListViewAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 Log.println(Log.WARN, "UPDATE", "UPDATE pressed");
-
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(TOBE_UPDATE_OBJECT_KEY,getProduct);
+                parentNavigationFragment.getNavController().navigate(R.id.action_navigation_product_list_to_navigation_product_update,bundle);
             }
         });
+
         binding.btnDeleteProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
