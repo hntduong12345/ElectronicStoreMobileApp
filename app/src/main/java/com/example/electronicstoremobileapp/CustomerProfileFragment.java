@@ -1,5 +1,6 @@
 package com.example.electronicstoremobileapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,6 +8,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import com.example.electronicstoremobileapp.Authentication.AuthenActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -37,11 +41,9 @@ public class CustomerProfileFragment extends Fragment {
      * @return A new instance of fragment CustomerProfileFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CustomerProfileFragment newInstance(String param1, String param2) {
+    public static CustomerProfileFragment newInstance() {
         CustomerProfileFragment fragment = new CustomerProfileFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -59,6 +61,15 @@ public class CustomerProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_customer_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_customer_profile, container, false);
+        Button login = (Button) view.findViewById(R.id.buttonSignUp);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AuthenActivity.class);
+                startActivity(intent);
+            }
+        });
+        return view;
     }
 }
