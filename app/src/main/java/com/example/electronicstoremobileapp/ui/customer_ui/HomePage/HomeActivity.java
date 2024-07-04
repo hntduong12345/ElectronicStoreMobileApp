@@ -2,6 +2,7 @@ package com.example.electronicstoremobileapp.ui.customer_ui.HomePage;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -15,13 +16,16 @@ import com.example.electronicstoremobileapp.ui.customer_ui.UserPage.UserPageFrag
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
-    BottomNavigationView bottomNavigationView;
+    BottomNavigationView bottomNavigationView, bottomProductNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_home);
+
+//        bottomProductNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationViewProductNav);
+//        bottomProductNavigationView.setVisibility(View.GONE);
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationViewHomeNav);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
@@ -54,4 +58,6 @@ public class HomeActivity extends AppCompatActivity implements BottomNavigationV
         }
         return false;
     }
+
+
 }
