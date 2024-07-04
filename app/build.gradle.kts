@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.electronicstoremobileapp"
-        minSdk = 24
+        minSdk = 29
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -34,7 +34,7 @@ android {
 dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.5.0")
     implementation("com.squareup.retrofit2:converter-gson:2.4.0")
-
+    implementation("com.auth0.android:jwtdecode:2.0.0")
 
     implementation(libs.appcompat)
     implementation(libs.material)

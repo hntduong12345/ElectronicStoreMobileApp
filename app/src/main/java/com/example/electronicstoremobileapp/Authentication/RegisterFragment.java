@@ -16,15 +16,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.electronicstoremobileapp.CustomerProfileFragment;
-import com.example.electronicstoremobileapp.Model.Authentication.Interface.AuthService;
-import com.example.electronicstoremobileapp.Model.Authentication.Login;
-import com.example.electronicstoremobileapp.Model.Authentication.LoginResponse;
-import com.example.electronicstoremobileapp.Model.Authentication.SignUp;
+import com.example.electronicstoremobileapp.MainActivity;
+import com.example.electronicstoremobileapp.Utility.UserLoggingUtil;
+import com.example.electronicstoremobileapp.apiClient.ApiClient;
+import com.example.electronicstoremobileapp.apiClient.accounts.AuthService;
+import com.example.electronicstoremobileapp.models.authentication.LoginResponse;
+import com.example.electronicstoremobileapp.models.authentication.SignUp;
 import com.example.electronicstoremobileapp.R;
-import com.example.electronicstoremobileapp.Repository.AuthRepository;
-
-import org.json.JSONObject;
+import com.example.electronicstoremobileapp.Utility.Preference;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -91,7 +90,16 @@ public class RegisterFragment extends Fragment {
                     if(response.isSuccessful()){
                         if(response.body() != null){
                             String token = response.body().accessToken;
-                            errorText.setText(token);
+                            String role = UserLoggingUtil.LogIn(getActivity(), token);
+                            Intent intent;
+                            if (role == "CUSTOMER"){
+                                intent = new Intent(getActivity(), MainActivity.class);
+                            }
+                            else {
+                                // TODO: CHANGE LATER
+                                intent = new Intent(getActivity(), MainActivity.class);
+                            }
+                            startActivity(intent);
                         }
                     }
                     else{
@@ -132,7 +140,7 @@ public class RegisterFragment extends Fragment {
         signup = view.findViewById(R.id.buttonSignUp);
         signin = view.findViewById(R.id.textViewSignIn);
 
-        authService = AuthRepository.getAuthService();
+        authService = ApiClient.getServiceClient(AuthService.class);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

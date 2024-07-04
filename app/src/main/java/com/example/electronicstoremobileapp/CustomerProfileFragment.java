@@ -62,14 +62,7 @@ public class CustomerProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_customer_profile, container, false);
-        Button login = (Button) view.findViewById(R.id.buttonSignUp);
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), AuthenActivity.class);
-                startActivity(intent);
-            }
-        });
+
         return view;
     }
 }
