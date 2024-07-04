@@ -2,13 +2,31 @@ package com.example.electronicstoremobileapp.ui.customer_ui.ShopPage.ProductUI;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import com.example.electronicstoremobileapp.Adapters.category.CategoryAdapter;
 import com.example.electronicstoremobileapp.R;
+import com.example.electronicstoremobileapp.apiClient.ApiClient;
+import com.example.electronicstoremobileapp.apiClient.categories.CategoryServices;
+import com.example.electronicstoremobileapp.models.CategoryDto;
+import com.example.electronicstoremobileapp.ui.customer_ui.HomePage.HomeActivity;
+
+import java.io.Console;
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +43,14 @@ public class ShopPageFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
+    private CategoryServices categoryServices;
+    private ListView lv_Category;
+    private ArrayList<CategoryDto> categoryDtoArrayList = new ArrayList<>();
+    private CategoryAdapter categoryAdapter;
+
+    private View currentView;
 
     public ShopPageFragment() {
         // Required empty public constructor
@@ -61,6 +87,43 @@ public class ShopPageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shop_page, container, false);
+        currentView = inflater.inflate(R.layout.fragment_shop_page, container, false);
+        return currentView;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        categoryServices = ApiClient.getServiceClient(CategoryServices.class);
+        LoadData();
+    }
+
+
+    private void LoadData() {
+        categoryServices.GetAll()
+                .enqueue(new Callback<List<CategoryDto>>() {
+                    @Override
+                    public void onResponse(Call<List<CategoryDto>> call, Response<List<CategoryDto>> response) {
+                        List<CategoryDto> categories = response.body();
+                        if (categories == null) {
+                            Log.d("Load Error", "Cannot load categories");
+                            return;
+                        }
+
+                        categoryDtoArrayList.clear();
+                        for (CategoryDto category : categories) {
+                            categoryDtoArrayList.add(category);
+                        }
+
+                        categoryAdapter = new CategoryAdapter(currentView.getContext(), R.layout.component_category, categoryDtoArrayList);
+                        lv_Category.setAdapter(categoryAdapter);
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<CategoryDto>> call, Throwable throwable) {
+                        Log.d("Load Error", "Load Error");
+                    }
+                });
     }
 }
