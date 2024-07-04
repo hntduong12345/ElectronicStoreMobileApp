@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
+        navView.setBackgroundColor(getColor(R.color.white));
+        //navView.setHeight
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(R.id.navigation_product, R.id.navigation_category, R.id.navigation_account)
@@ -46,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        getWindow().setStatusBarColor(getColor(R.color.teal_700));
+        //getWindow().setStatusBarColor(getColor(R.color.teal_700));
 
         if (allPermissionsGranted() == false) {
             //requestPermissions();
