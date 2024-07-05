@@ -16,16 +16,6 @@
 
     </fragment>
     <fragment
-        android:id="@+id/navigation_voucher_update"
-        android:name="com.example.electronicstoremobileapp.admins.ui.vouchers.VoucherUpdateFragment"
-        android:label="@string/title_voucher"
-        tools:layout="@layout/fragment_admin_voucher_update">
-
-        <action
-            android:id="@+id/action_navigation_voucher_update_to_navigation_voucher"
-            app:destination="@id/navigation_voucher" />
-    </fragment>
-    <fragment
         android:id="@+id/navigation_voucher_list"
         android:name="com.example.electronicstoremobileapp.admins.ui.vouchers.VoucherListFragment"
         android:label="@string/title_voucher"
@@ -34,8 +24,8 @@
             android:id="@+id/action_navigation_voucher_list_to_navigation_voucher_create"
             app:destination="@id/navigation_voucher_create" />
         <action
-            android:id="@+id/action_navigation_voucher_list_to_navigation_voucher_update"
-            app:destination="@id/navigation_voucher_update" />
+            android:id="@+id/action_navigation_voucher_list_to_navigation_voucher_details"
+            app:destination="@id/navigation_voucher_details" />
     </fragment>
     <fragment
         android:id="@+id/navigation_voucher_create"
@@ -43,6 +33,14 @@
         tools:layout="@layout/fragment_admin_voucher_create">
         <action
             android:id="@+id/action_navigation_voucher_create_to_navigation_voucher"
+            app:destination="@id/navigation_voucher" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_voucher_details"
+        android:name="com.example.electronicstoremobileapp.admins.ui.vouchers.VoucherFragmentDetails"
+        tools:layout="@layout/fragment_admin_voucher_details">
+        <action
+            android:id="@+id/action_navigation_voucher_details_to_navigation_voucher"
             app:destination="@id/navigation_voucher" />
     </fragment>
 </navigation>

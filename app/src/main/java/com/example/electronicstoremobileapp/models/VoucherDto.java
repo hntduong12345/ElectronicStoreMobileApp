@@ -21,11 +21,11 @@ public class VoucherDto implements Parcelable {
     @SerializedName("createdDate")
     public String CreatedDate;
     @SerializedName("percentage")
-    public float Percentage;
+    public int Percentage;
     @SerializedName("isAvailable")
     public boolean IsAvailable;
 
-    public VoucherDto(String voucherId, float totalPrice, AccountDto account, String voucherCode, String expiryDate, String createdDate, float percentage, float moneyThreshold, boolean isAvailable) {
+    public VoucherDto(String voucherId, AccountDto account, String voucherCode, String expiryDate, String createdDate, int percentage, boolean isAvailable) {
         VoucherId = voucherId;
         Account = account;
         VoucherCode = voucherCode;
@@ -46,7 +46,7 @@ public class VoucherDto implements Parcelable {
         dest.writeString(VoucherCode);
         dest.writeString(ExpiryDate);
         dest.writeString(CreatedDate);
-        dest.writeFloat(Percentage);
+        dest.writeInt(Percentage);
         dest.writeBoolean(IsAvailable);
     }
 
@@ -56,7 +56,7 @@ public class VoucherDto implements Parcelable {
         VoucherCode = in.readString();
         ExpiryDate = in.readString();
         CreatedDate = in.readString();
-        Percentage = in.readFloat();
+        Percentage = in.readInt();
         IsAvailable = in.readBoolean();
     }
 

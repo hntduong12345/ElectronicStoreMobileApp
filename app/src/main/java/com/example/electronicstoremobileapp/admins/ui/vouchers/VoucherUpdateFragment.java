@@ -93,7 +93,7 @@ public class VoucherUpdateFragment extends Fragment {
             if (getProduct == null) {
                 Toast.makeText(this.getContext(), "CANNOT FOUND PRODUCT TO UPDATE", Toast.LENGTH_LONG);
                 NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_activity_main);
-                navController.navigate(R.id.action_navigation_voucher_update_to_navigation_voucher);
+                //navController.navigate(R.id.action_navigation_voucher_update_to_navigation_voucher);
             }
             selectedProduct = getProduct;
             modelToUpdate = new UpdateProductDto();
@@ -164,7 +164,7 @@ public class VoucherUpdateFragment extends Fragment {
         NavHostFragment parentFragment = (NavHostFragment) getParentFragment();
         if (parentFragment != null) {
             NavController navController = parentFragment.getNavController();
-            navController.navigate(R.id.action_navigation_voucher_update_to_navigation_voucher);
+            //navController.navigate(R.id.action_navigation_voucher_update_to_navigation_voucher);
         }
     }
     private void addNewErrorToErrorList(String field, String message){

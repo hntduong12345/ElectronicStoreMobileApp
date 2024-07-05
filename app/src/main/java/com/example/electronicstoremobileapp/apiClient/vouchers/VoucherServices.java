@@ -1,5 +1,7 @@
 package com.example.electronicstoremobileapp.apiClient.vouchers;
 
+import com.example.electronicstoremobileapp.admins.ui.vouchers.models.VoucherCreateDto;
+import com.example.electronicstoremobileapp.admins.ui.vouchers.models.VoucherUpdateDto;
 import com.example.electronicstoremobileapp.models.ProductDto;
 import com.example.electronicstoremobileapp.models.VoucherDto;
 
@@ -19,11 +21,22 @@ public interface VoucherServices {
     @GET("api/Voucher/get-all")
     Call<List<VoucherDto>> GetAll();
 
+    @GET("api/Voucher/get-voucher/{id}")
+    Call<VoucherDto> Get(@Path("id") String id);
+
     @Multipart
     @POST("api/Voucher/create/{accountId}")
-    Call<ProductDto> Create(
+    Call Create(
             @Path("AccountId") String accountId,
-            @Body VoucherDto voucher
+            @Body VoucherCreateDto voucher
     );
+
+    @Multipart
+    @POST("api/Voucher/update{id}")
+    Call Update(
+            @Path("AccountId") String id,
+            @Body VoucherUpdateDto voucher
+    );
+
 
 }

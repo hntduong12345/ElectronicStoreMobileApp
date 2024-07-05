@@ -1,6 +1,7 @@
 package com.example.electronicstoremobileapp.admins.ui.vouchers.viewElements;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +9,7 @@ import android.widget.BaseAdapter;
 
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.electronicstoremobileapp.R;
 import com.example.electronicstoremobileapp.databinding.ListviewitemAdminVoucherListItemBinding;
 import com.example.electronicstoremobileapp.models.VoucherDto;
 
@@ -54,8 +56,18 @@ public class VoucherAdapter extends BaseAdapter {
         VoucherDto voucher = getItem(position);
         binding.txtVoucherCode.setText(voucher.VoucherCode);
         binding.txtVoucherAuthor.setText(voucher.Account.Email);
-        binding.txtVoucherDuration.setText(voucher.CreatedDate + "-" + voucher.ExpiryDate);
+        binding.txtVoucherDuration.setText(voucher.CreatedDate + "---" + voucher.ExpiryDate);
         binding.txtVoucherStatus.setText(voucher.IsAvailable ? "Active" : "Deactive");
+        binding.btnUpdate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (parentNavigationFragment != null){
+                    Bundle bundle = new Bundle();
+                    bundle.putString("VoucherId", voucher.VoucherId);
+                    parentNavigationFragment.getNavController().navigate(R.id.action_navigation_voucher_list_to_navigation_voucher_details, bundle);
+                }
+            }
+        });
         return convertView;
     }
 }
