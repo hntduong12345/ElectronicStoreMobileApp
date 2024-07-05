@@ -31,5 +31,10 @@
         android:name="com.example.electronicstoremobileapp.admins.ui.vouchers.VoucherFragment"
         android:label="@string/title_voucher"
         tools:layout="@layout/fragment_admin_voucher" />
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.electronicstoremobileapp.admins.ui.profile.ProfileFragment"
+        android:label="@string/title_voucher"
+        tools:layout="@layout/fragment_admin_profile" />
 
 </navigation>
