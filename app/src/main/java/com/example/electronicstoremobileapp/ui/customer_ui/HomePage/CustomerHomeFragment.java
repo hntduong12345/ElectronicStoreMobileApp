@@ -59,7 +59,7 @@ public class CustomerHomeFragment extends Fragment {
                 .findFragmentById(R.id.nav_host_fragment_customer_home);
         NavController navController = navHostFragment.getNavController();
         this.navController = navController;
-        navigateToFragment(R.id.navigation_account_list);
+        navigateToFragment(R.id.homePageFragment);
         return view;
     }
 

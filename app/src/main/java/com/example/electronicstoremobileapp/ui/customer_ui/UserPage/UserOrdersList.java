@@ -11,26 +11,26 @@ import android.view.ViewGroup;
 
 import com.example.electronicstoremobileapp.R;
 import com.example.electronicstoremobileapp.databinding.FragmentHomePageBinding;
-import com.example.electronicstoremobileapp.databinding.FragmentUserPageBinding;
+import com.example.electronicstoremobileapp.databinding.FragmentUserOrdersListBinding;
 import com.example.electronicstoremobileapp.ui.customer_ui.HomePage.HomePageFragment;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link UserPageFragment#newInstance} factory method to
+ * Use the {@link UserOrdersList#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UserPageFragment extends Fragment {
+public class UserOrdersList extends Fragment {
 
-    FragmentUserPageBinding binding;
+    FragmentUserOrdersListBinding binding;
     public NavController navController;
 
-    public UserPageFragment() {
+    public UserOrdersList() {
         // Required empty public constructor
     }
 
 
-    public static UserPageFragment newInstance() {
-        UserPageFragment fragment = new UserPageFragment();
+    public static UserOrdersList newInstance() {
+        UserOrdersList fragment = new UserOrdersList();
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
@@ -47,10 +47,10 @@ public class UserPageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentUserPageBinding.inflate(inflater, container, false);
+        binding = FragmentUserOrdersListBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        return inflater.inflate(R.layout.fragment_user_page, container, false);
+        return inflater.inflate(R.layout.fragment_user_orders_list, container, false);
     }
 
     @Override

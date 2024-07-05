@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/userOrdersList"
-        android:name="com.example.electronicstoremobileapp.ui.customer_ui.Cart_Order.UserOrdersList"
+        android:name="com.example.electronicstoremobileapp.ui.customer_ui.UserPage.UserOrdersList"
         android:label="fragment_user_orders_list"
         tools:layout="@layout/fragment_user_orders_list" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/orderDetailFragment"
-        android:name="com.example.electronicstoremobileapp.ui.customer_ui.Cart_Order.OrderDetailFragment"
+        android:name="com.example.electronicstoremobileapp.ui.customer_ui.UserPage.OrderDetailFragment"
         android:label="fragment_order_detail"
         tools:layout="@layout/fragment_order_detail" >
         <action
