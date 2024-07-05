@@ -16,7 +16,7 @@
         tools:layout="@layout/fragment_admin_product" />
     <fragment
         android:id="@+id/navigation_category"
-        android:name="com.example.electronicstoremobileapp.admins.ui.categories.CategoriesFragment"
+        android:name="com.example.electronicstoremobileapp.admins.ui.categories.CategoryFragment"
         android:label="@string/title_category"
         tools:layout="@layout/fragment_admin_category" />
     <fragment
