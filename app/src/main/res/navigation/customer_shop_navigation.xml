@@ -23,8 +23,8 @@
             android:id="@+id/action_shopProductListFragment_to_productDetailFragment2"
             app:destination="@id/productDetailFragment2" />
         <action
-            android:id="@+id/action_shopProductListFragment_to_shopPageFragment"
-            app:destination="@id/shopPageFragment" />
+            android:id="@+id/action_shopProductListFragment_to_customerShopFragment"
+            app:destination="@id/customerShopFragment" />
     </fragment>
     <fragment
         android:id="@+id/productDetailFragment2"
@@ -32,7 +32,19 @@
         android:label="fragment_product_detail"
         tools:layout="@layout/fragment_product_detail" >
         <action
-            android:id="@+id/action_productDetailFragment2_to_shopProductListFragment"
+            android:id="@+id/action_productDetailFragment2_to_customerShopFragment"
+            app:destination="@id/customerShopFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerShopFragment"
+        android:name="com.example.electronicstoremobileapp.ui.customer_ui.ShopPage.CustomerShopFragment"
+        android:label="fragment_customer_shop"
+        tools:layout="@layout/fragment_customer_shop" >
+        <action
+            android:id="@+id/action_customerShopFragment_to_shopPageFragment"
+            app:destination="@id/shopPageFragment" />
+        <action
+            android:id="@+id/action_customerShopFragment_to_shopProductListFragment"
             app:destination="@id/shopProductListFragment" />
     </fragment>
 </navigation>

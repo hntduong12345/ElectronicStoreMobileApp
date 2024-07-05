@@ -60,6 +60,6 @@ public class AccountFragment extends Fragment {
     }
 
     private void navigateToFragment(int fragmentId) {
-        navController.navigate(fragmentId); 
+        navController.navigate(fragmentId);
     }
 }

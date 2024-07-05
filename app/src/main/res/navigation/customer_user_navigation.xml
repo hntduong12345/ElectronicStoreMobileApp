@@ -25,9 +25,6 @@
         <action
             android:id="@+id/action_userOrdersList_to_orderDetailFragment"
             app:destination="@id/orderDetailFragment" />
-        <action
-            android:id="@+id/action_userOrdersList_to_userPageFragment"
-            app:destination="@id/userPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/orderDetailFragment"
@@ -35,8 +32,8 @@
         android:label="fragment_order_detail"
         tools:layout="@layout/fragment_order_detail" >
         <action
-            android:id="@+id/action_orderDetailFragment_to_userOrdersList"
-            app:destination="@id/userOrdersList" />
+            android:id="@+id/action_orderDetailFragment_to_customerUserFragment"
+            app:destination="@id/customerUserFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsPageFragment"
@@ -44,7 +41,19 @@
         android:label="fragment_settings_page"
         tools:layout="@layout/fragment_settings_page" >
         <action
-            android:id="@+id/action_settingsPageFragment_to_userPageFragment"
+            android:id="@+id/action_settingsPageFragment_to_customerUserFragment"
+            app:destination="@id/customerUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerUserFragment"
+        android:name="com.example.electronicstoremobileapp.ui.customer_ui.UserPage.CustomerUserFragment"
+        android:label="fragment_customer_user"
+        tools:layout="@layout/fragment_customer_user" >
+        <action
+            android:id="@+id/action_customerUserFragment_to_userPageFragment"
             app:destination="@id/userPageFragment" />
+        <action
+            android:id="@+id/action_customerUserFragment_to_userOrdersList"
+            app:destination="@id/userOrdersList" />
     </fragment>
 </navigation>

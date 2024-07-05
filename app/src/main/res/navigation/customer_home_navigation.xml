@@ -20,7 +20,16 @@
         android:label="fragment_product_detail"
         tools:layout="@layout/fragment_product_detail" >
         <action
-            android:id="@+id/action_productDetailFragment_to_homePageFragment"
+            android:id="@+id/action_productDetailFragment_to_customerHomeFragment"
+            app:destination="@id/customerHomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerHomeFragment"
+        android:name="com.example.electronicstoremobileapp.ui.customer_ui.HomePage.CustomerHomeFragment"
+        android:label="fragment_customer_home"
+        tools:layout="@layout/fragment_customer_home" >
+        <action
+            android:id="@+id/action_customerHomeFragment_to_homePageFragment"
             app:destination="@id/homePageFragment" />
     </fragment>
 </navigation>

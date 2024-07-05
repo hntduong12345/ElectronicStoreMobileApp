@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.electronicstoremobileapp.R;
-import com.example.electronicstoremobileapp.databinding.FragmentAdminAccountBinding;
 import com.example.electronicstoremobileapp.databinding.FragmentCustomerHomeBinding;
 
 /**
