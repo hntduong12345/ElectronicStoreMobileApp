@@ -92,12 +92,12 @@ public class AccountListViewAdapter extends BaseAdapter {
             binding.btnDeleteProduct.setEnabled(true);
             binding.btnDeleteProduct.setImageDrawable(parentContext.getDrawable(R.drawable.baseline_delete_24));
         }
-        binding.btnUpdateProduct.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.println(Log.WARN, "UPDATE", "UPDATE pressed");
-            }
-        });
+//        binding.btnUpdateProduct.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.println(Log.WARN, "UPDATE", "UPDATE pressed");
+//            }
+//        });
         binding.btnDeleteProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

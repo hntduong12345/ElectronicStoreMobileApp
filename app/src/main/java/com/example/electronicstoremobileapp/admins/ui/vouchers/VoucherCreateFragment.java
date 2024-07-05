@@ -113,7 +113,7 @@ public class VoucherCreateFragment extends Fragment {
                 NavHostFragment parentFragment = (NavHostFragment) getParentFragment();
                 if (parentFragment != null) {
                     NavController navController = parentFragment.getNavController();
-                    navController.navigate(R.id.action_navigation_voucher_details_to_navigation_voucher);
+                    navController.navigate(R.id.action_navigation_voucher_create_to_navigation_voucher);
                 }
             }
         });
