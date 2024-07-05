@@ -14,12 +14,16 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 
+import com.example.electronicstoremobileapp.AppConstant;
+import com.example.electronicstoremobileapp.Helpers;
 import com.example.electronicstoremobileapp.R;
 import com.example.electronicstoremobileapp.admins.ui.categories.models.CreateCategoryDto;
+import com.example.electronicstoremobileapp.admins.ui.categories.models.UpdateCategoryDto;
 import com.example.electronicstoremobileapp.apiClient.ApiClient;
 import com.example.electronicstoremobileapp.apiClient.categories.CategoryServices;
 import com.example.electronicstoremobileapp.databinding.FragmentAdminCategoryCreateBinding;
 import com.example.electronicstoremobileapp.databinding.FragmentAdminCategoryUpdateBinding;
+import com.example.electronicstoremobileapp.models.AccountDto;
 import com.example.electronicstoremobileapp.models.CategoryDto;
 
 import org.apache.commons.lang3.StringUtils;
@@ -31,6 +35,7 @@ import retrofit2.Response;
 public class CategoryFragmentUpdate extends Fragment {
     FragmentAdminCategoryUpdateBinding binding;
     Toolbar toolbar;
+    CategoryDto selectedDto;
     public CategoryFragmentUpdate() {
         // Required empty public constructor
     }
@@ -48,7 +53,8 @@ public class CategoryFragmentUpdate extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-
+            CategoryDto categoryDto = (CategoryDto) getArguments().get(AppConstant.TOBE_UPDATE_OBJECT_KEY);
+            this.selectedDto = categoryDto;
         }
     }
 
@@ -74,6 +80,7 @@ public class CategoryFragmentUpdate extends Fragment {
                 onUpdateClick(v);
             }
         });
+        bindToView();
         return view;
         //return inflater.inflate(R.layout.fragment_admin_category_update, container, false);
     }
@@ -91,6 +98,10 @@ public class CategoryFragmentUpdate extends Fragment {
         }
         return navHostFragment.getNavController();
     }
+    private void bindToView() {
+        binding.txtCategoryName.setText(Helpers.returnEmptyStringOrValue(selectedDto.CategoryName));
+        binding.txtCategoryDescription.setText(Helpers.returnEmptyStringOrValue(selectedDto.CategoryDescription));
+    }
     private boolean ValidateField() {
         boolean isValid = true;
         String categoryName = binding.txtCategoryName.getText().toString().trim();
@@ -107,45 +118,43 @@ public class CategoryFragmentUpdate extends Fragment {
         return isValid;
     }
 
-    private CreateCategoryDto bindToModel(String categoryName, String categoryDescription) {
+    private UpdateCategoryDto bindToModel(String categoryName, String categoryDescription) {
         boolean isNullOrEmpty = StringUtils.isAnyEmpty(categoryName, categoryDescription);
         if (isNullOrEmpty) {
             return null;
         }
-        return new CreateCategoryDto(categoryName,categoryDescription);
+        return new UpdateCategoryDto(categoryName,categoryDescription);
     }
     private void onUpdateClick(View view) {
-
         boolean validateResultSuccess = ValidateField();
         if (validateResultSuccess) {
-            CreateCategoryDto createCategoryDto = bindToModel(binding.txtCategoryName.getText().toString(),
+            UpdateCategoryDto updateCategoryDto = bindToModel(binding.txtCategoryName.getText().toString(),
                     binding.txtCategoryDescription.getText().toString());
-            if (createCategoryDto != null) {
-                createCategory(createCategoryDto);
+            if (updateCategoryDto != null) {
+                updateCategory(updateCategoryDto);
             }
             return;
         } else {
             Toast.makeText(CategoryFragmentUpdate.this.getContext(), "validation fail", Toast.LENGTH_SHORT).show();
         }
     }
-    private void createCategory(CreateCategoryDto categoryToCreate) {
-        Call<CategoryDto> createMethod = ApiClient.getServiceClient(CategoryServices.class).Create(categoryToCreate);
-        createMethod.enqueue(new Callback<CategoryDto>() {
+    private void updateCategory(UpdateCategoryDto updateCategoryDto) {
+        Call createMethod = ApiClient.getServiceClient(CategoryServices.class).Update(selectedDto.CategoryId, updateCategoryDto);
+        createMethod.enqueue(new Callback() {
             @Override
-            public void onResponse(Call<CategoryDto> call, Response<CategoryDto> response) {
+            public void onResponse(Call call, Response response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(getParentFragment().getActivity(), "create success", Toast.LENGTH_SHORT);
                     Log.i("UPDATE SUCCESS", "UPDATE category success");
-                    getNavController().navigate(R.id.action_navigation_category_create_to_navigation_category);
+                    getNavController().navigate(R.id.action_navigation_category_update_to_navigation_category);
                 } else {
                     Log.e("UPDATE ERROR", "cannot UPDATE, error bad request or other");
                     Toast.makeText(getContext(), "UPDATE fail, unknown error", Toast.LENGTH_LONG);
-
                 }
             }
 
             @Override
-            public void onFailure(Call<CategoryDto> call, Throwable throwable) {
+            public void onFailure(Call call, Throwable throwable) {
                 Log.e("UPDATE ERROR", "cannot UPDATE, error 500 or internet", throwable);
                 Toast.makeText(getContext(), "cannot UPDATE", Toast.LENGTH_SHORT);
             }
