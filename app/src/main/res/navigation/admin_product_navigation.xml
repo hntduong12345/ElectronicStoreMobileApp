@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@+id/navigation_product_list"
-    android:id="@+id/admin_product_navigation">
+    android:id="@+id/admin_view_navigation">
     <fragment
         android:id="@+id/navigation_product"
         android:name="com.example.electronicstoremobileapp.admins.ui.products.ProductFragment"
