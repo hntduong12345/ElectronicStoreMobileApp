@@ -92,7 +92,7 @@ public class LoginFragment extends Fragment {
                             String token = response.body().accessToken;
                             String role = UserLoggingUtil.LogIn(getActivity(), token);
                             Intent intent;
-                            if (role == "CUSTOMER"){
+                            if (role.equals("CUSTOMER")){
                                 intent = new Intent(getActivity(), MainActivity.class);
                             }
                             else {

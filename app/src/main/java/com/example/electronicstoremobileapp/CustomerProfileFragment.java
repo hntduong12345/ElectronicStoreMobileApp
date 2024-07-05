@@ -7,12 +7,16 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.electronicstoremobileapp.Utility.UserLoggingUtil;
+import com.example.electronicstoremobileapp.databinding.FragmentCustomerProfileBinding;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link CustomerProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class CustomerProfileFragment extends Fragment {
+    FragmentCustomerProfileBinding binding;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -56,6 +60,15 @@ public class CustomerProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_order, container, false);
+        binding = FragmentCustomerProfileBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+        binding.BtnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserLoggingUtil.LogOut(getContext());
+                getActivity().finish();
+            }
+        });
+        return view;
     }
 }

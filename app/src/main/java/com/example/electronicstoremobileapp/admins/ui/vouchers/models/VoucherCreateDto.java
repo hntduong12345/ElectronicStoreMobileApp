@@ -8,8 +8,6 @@ public class VoucherCreateDto {
     public String VoucherCode;
     @SerializedName("expiryDate")
     public String ExpiryDate;
-    @SerializedName("createdDate")
-    public String CreatedDate;
     @SerializedName("percentage")
     public int Percentage;
     @SerializedName("isAvailable")
