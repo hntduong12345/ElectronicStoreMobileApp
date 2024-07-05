@@ -54,7 +54,7 @@ public class VoucherAdapter extends BaseAdapter {
             binding = (ListviewitemAdminVoucherListItemBinding) convertView.getTag();
         }
         VoucherDto voucher = getItem(position);
-        binding.txtVoucherCode.setText(voucher.VoucherCode);
+        binding.txtVoucherCode.setText(voucher.VoucherCode + " (Discount: "+voucher.Percentage+"%)");
         binding.txtVoucherAuthor.setText(voucher.Account.Email);
         binding.txtVoucherDuration.setText(voucher.CreatedDate + "---" + voucher.ExpiryDate);
         binding.txtVoucherStatus.setText(voucher.IsAvailable ? "Active" : "Deactive");

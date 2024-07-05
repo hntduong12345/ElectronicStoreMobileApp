@@ -56,10 +56,9 @@ public class VoucherCreateFragment extends Fragment {
     final Calendar myDate= Calendar.getInstance();
     final Calendar myTime= Calendar.getInstance();
     Toolbar toolbar;
-    VoucherDto voucherDto;
-    DateTimeFormatter isoFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
     String dateFormat = "dd/MM/yyyy";
     String hourFormat = "HH:mm";
+    boolean isAvail = true;
 
     public VoucherCreateFragment() {
         // Required empty public constructor
@@ -100,7 +99,7 @@ public class VoucherCreateFragment extends Fragment {
                     myTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
                     myTime.set(Calendar.MINUTE, minute);
                     SimpleDateFormat sdf = new SimpleDateFormat(hourFormat);
-                    binding.txtExpiryTime.setText(sdf.format(myDate.getTime()));
+                    binding.txtExpiryTime.setText(sdf.format(myTime.getTime()));
                 }
             }
         };
@@ -139,11 +138,11 @@ public class VoucherCreateFragment extends Fragment {
                     public boolean onMenuItemClick(MenuItem item) {
                         if(item.getItemId() == R.id.VoucherStatusActive){
                             binding.txtIsAvailable.setText("Active");
-                            voucherDto.IsAvailable = true;
+                            isAvail = true;
                         }
                         if(item.getItemId() == R.id.VoucherStatusDeactive){
                             binding.txtIsAvailable.setText("Deactive");
-                            voucherDto.IsAvailable = false;
+                            isAvail = false;
                         }
                         return false;
                     }
@@ -151,6 +150,7 @@ public class VoucherCreateFragment extends Fragment {
                 menu.show();
             }
         });
+        binding.txtIsAvailable.setText("Active");
         binding.btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,7 +177,7 @@ public class VoucherCreateFragment extends Fragment {
                 binding.txtVoucherCode.getText().toString(),
                 binding.txtExpiryDate.getText().toString() + " " + binding.txtExpiryTime.getText().toString(),
                 percent,
-                voucherDto.IsAvailable
+                isAvail
         );
         String id = UserLoggingUtil.GetUserInfo(getContext()).getFirst();
         Call call = ApiClient.getServiceClient(VoucherServices.class).Create(id, created);
@@ -207,14 +207,34 @@ public class VoucherCreateFragment extends Fragment {
     }
 
     boolean CheckValidation(){
-        LocalDateTime expiryDate = LocalDateTime.parse(voucherDto.ExpiryDate);
-        LocalDateTime createdDate = LocalDateTime.parse(voucherDto.CreatedDate);
-        if(expiryDate.isBefore(createdDate))
-            Toast.makeText(this.getContext(), "Expiry Date must be later than Created Date", Toast.LENGTH_SHORT).show();
-        if(voucherDto.Percentage > 100)
-            Toast.makeText(this.getContext(), "Percentage must be lower than 100", Toast.LENGTH_SHORT).show();
-        else
-            return true;
-        return false;
+        if(StringUtils.isEmpty(binding.txtVoucherCode.getText().toString())){
+            binding.txtVoucherCode.setError("Code can't be empty");
+            return false;
+        }
+        if(StringUtils.isEmpty(binding.txtExpiryDate.getText().toString())){
+            binding.txtExpiryDate.setError("Expiry Date can't be empty");
+            return false;
+        }
+        if(StringUtils.isEmpty(binding.txtExpiryTime.getText().toString())){
+            binding.txtExpiryTime.setError("Expiry Time can't be empty");
+            return false;
+        }
+        if(StringUtils.isEmpty(binding.txtPercentage.getText().toString())){
+            binding.txtPercentage.setError("Percentage can't be empty");
+            return false;
+        }
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime expiryDate = LocalDateTime.parse(binding.txtExpiryDate.getText().toString() + " " + binding.txtExpiryTime.getText().toString(),dateFormatter);
+        LocalDateTime createdDate = LocalDateTime.now();
+        if(expiryDate.isBefore(createdDate)){
+            binding.txtExpiryDate.setError("Expiry Date must be later than Created Date");
+            return false;
+        }
+        Integer percent = Integer.valueOf(binding.txtPercentage.getText().toString());
+        if(percent > 100 || percent <= 0){
+            binding.txtPercentage.setError("Percentage must be lower than 100, greater than 0");
+            return false;
+        }
+        return true;
     }
 }

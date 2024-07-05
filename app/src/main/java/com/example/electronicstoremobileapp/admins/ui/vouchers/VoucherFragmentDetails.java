@@ -1,6 +1,7 @@
 package com.example.electronicstoremobileapp.admins.ui.vouchers;
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.PopupMenu;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
@@ -24,6 +26,8 @@ import com.example.electronicstoremobileapp.apiClient.ApiClient;
 import com.example.electronicstoremobileapp.apiClient.vouchers.VoucherServices;
 import com.example.electronicstoremobileapp.databinding.FragmentAdminVoucherDetailsBinding;
 import com.example.electronicstoremobileapp.models.VoucherDto;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -43,9 +47,10 @@ public class VoucherFragmentDetails  extends Fragment {
     final Calendar myCalendar= Calendar.getInstance();
     Toolbar toolbar;
     VoucherDto voucherDto;
-    DateTimeFormatter isoFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSXXX");
-    String myFormat="dd/MM/yyyy";
-    SimpleDateFormat sdf = new SimpleDateFormat(myFormat);
+    final Calendar myDate= Calendar.getInstance();
+    final Calendar myTime= Calendar.getInstance();
+    String dateFormat = "dd/MM/yyyy";
+    String hourFormat = "HH:mm";
     public VoucherFragmentDetails() {
         // Required empty public constructor
     }
@@ -75,10 +80,22 @@ public class VoucherFragmentDetails  extends Fragment {
         DatePickerDialog.OnDateSetListener date =new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
-                myCalendar.set(Calendar.YEAR, year);
-                myCalendar.set(Calendar.MONTH,month);
-                myCalendar.set(Calendar.DAY_OF_MONTH,day);
-                binding.txtExpiryDate.setText(sdf.format(myCalendar.getTime()));
+                myDate.set(Calendar.YEAR, year);
+                myDate.set(Calendar.MONTH,month);
+                myDate.set(Calendar.DAY_OF_MONTH,day);
+                SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+                binding.txtExpiryDate.setText(sdf.format(myDate.getTime()));
+            }
+        };
+        TimePickerDialog.OnTimeSetListener time = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                if (view.isShown()) {
+                    myTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                    myTime.set(Calendar.MINUTE, minute);
+                    SimpleDateFormat sdf = new SimpleDateFormat(hourFormat);
+                    binding.txtExpiryTime.setText(sdf.format(myTime.getTime()));
+                }
             }
         };
         toolbar = binding.toolbarDetail;
@@ -100,6 +117,12 @@ public class VoucherFragmentDetails  extends Fragment {
                 new DatePickerDialog(getContext(),date,myCalendar.get(Calendar.YEAR),myCalendar.get(Calendar.MONTH),myCalendar.get(Calendar.DAY_OF_MONTH)).show();
             }
         });
+        binding.txtExpiryTime.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                new TimePickerDialog(getContext(),time,myTime.get(Calendar.HOUR),myDate.get(Calendar.MINUTE), true).show();
+            }
+        });
         binding.txtIsAvailable.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -119,6 +142,7 @@ public class VoucherFragmentDetails  extends Fragment {
                         return false;
                     }
                 });
+                menu.show();
             }
         });
         binding.btnUpdate.setOnClickListener(new View.OnClickListener() {
@@ -138,11 +162,12 @@ public class VoucherFragmentDetails  extends Fragment {
         throw new NullPointerException("Nav controller is null in Voucher Detail Fragment");
     }
     private void bindToView() {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(myFormat);
         binding.txtVoucherId.setText(Helpers.returnEmptyStringOrValue(voucherDto.VoucherId));
         binding.txtVoucherCode.setText(Helpers.returnEmptyStringOrValue(voucherDto.VoucherCode));
         binding.txtCreatedDate.setText(Helpers.returnEmptyStringOrValue(voucherDto.CreatedDate));
-        binding.txtExpiryDate.setText(Helpers.returnEmptyStringOrValue(voucherDto.ExpiryDate));
+        String[] splitted = voucherDto.ExpiryDate.split(" ");
+        binding.txtExpiryDate.setText(Helpers.returnEmptyStringOrValue(splitted[0]));
+        binding.txtExpiryTime.setText(Helpers.returnEmptyStringOrValue(splitted[1]));
         binding.txtPercentage.setText(Helpers.returnEmptyStringOrValue(String.valueOf(voucherDto.Percentage)));
         binding.txtIsAvailable.setText(Helpers.returnEmptyStringOrValue(voucherDto.IsAvailable ? "Active" : "Deactive"));
     }
@@ -174,7 +199,7 @@ public class VoucherFragmentDetails  extends Fragment {
         int percent = Integer.valueOf(binding.txtPercentage.getText().toString());
         VoucherUpdateDto updated = new VoucherUpdateDto(
                 binding.txtVoucherCode.getText().toString(),
-                binding.txtExpiryDate.getText().toString(),
+                binding.txtExpiryDate.getText().toString() + " " + binding.txtExpiryTime.getText().toString(),
                 percent,
                 voucherDto.IsAvailable
         );
@@ -198,14 +223,34 @@ public class VoucherFragmentDetails  extends Fragment {
     }
 
     boolean CheckValidation(){
-        LocalDateTime expiryDate = LocalDateTime.parse(voucherDto.ExpiryDate);
-        LocalDateTime createdDate = LocalDateTime.parse(voucherDto.CreatedDate);
-        if(expiryDate.isBefore(createdDate))
-            Toast.makeText(this.getContext(), "Expiry Date must be later than Created Date", Toast.LENGTH_SHORT).show();
-        if(voucherDto.Percentage > 100)
-            Toast.makeText(this.getContext(), "Percentage must be lower than 100", Toast.LENGTH_SHORT).show();
-        else
-            return true;
-        return false;
+        if(StringUtils.isEmpty(binding.txtVoucherCode.getText().toString())){
+            binding.txtVoucherCode.setError("Code can't be empty");
+            return false;
+        }
+        if(StringUtils.isEmpty(binding.txtExpiryDate.getText().toString())){
+            binding.txtExpiryDate.setError("Expiry Date can't be empty");
+            return false;
+        }
+        if(StringUtils.isEmpty(binding.txtExpiryTime.getText().toString())){
+            binding.txtExpiryTime.setError("Expiry Time can't be empty");
+            return false;
+        }
+        if(StringUtils.isEmpty(binding.txtPercentage.getText().toString())){
+            binding.txtPercentage.setError("Percentage can't be empty");
+            return false;
+        }
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+        LocalDateTime expiryDate = LocalDateTime.parse(binding.txtExpiryDate.getText().toString() + " " + binding.txtExpiryTime.getText().toString(),dateFormatter);
+        LocalDateTime createdDate = LocalDateTime.now();
+        if(expiryDate.isBefore(createdDate)){
+            binding.txtExpiryDate.setError("Expiry Date must be later than Created Date");
+            return false;
+        }
+        Integer percent = Integer.valueOf(binding.txtPercentage.getText().toString());
+        if(percent > 100 || percent <= 0){
+            binding.txtPercentage.setError("Percentage must be lower than 100, greater than 0");
+            return false;
+        }
+        return true;
     }
 }

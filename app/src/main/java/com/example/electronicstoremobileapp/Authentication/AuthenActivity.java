@@ -29,14 +29,14 @@ public class AuthenActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Triple<String, String, String> userInfo = UserLoggingUtil.GetUserInfo(this);
-        if(userInfo != null){
+        if(userInfo.getThird() != null){
             Intent intent;
-            if(userInfo.getThird() == "CUSTOMER"){
+            if(userInfo.getThird().equals("CUSTOMER")){
                 intent = new Intent(this, MainActivity.class);
             }
             else{
                 // TODO: CHANGE LATER
-                intent = new Intent(this, MainActivity.class);
+                intent = new Intent(this, com.example.electronicstoremobileapp.admins.MainActivity.class);
             }
             startActivity(intent);
         }
