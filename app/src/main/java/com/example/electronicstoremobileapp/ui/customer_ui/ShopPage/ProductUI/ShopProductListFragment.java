@@ -3,12 +3,16 @@ package com.example.electronicstoremobileapp.ui.customer_ui.ShopPage.ProductUI;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.electronicstoremobileapp.R;
+import com.example.electronicstoremobileapp.databinding.FragmentCartPageBinding;
+import com.example.electronicstoremobileapp.databinding.FragmentShopProductListBinding;
+import com.example.electronicstoremobileapp.ui.customer_ui.Cart_Order.CartPageFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,29 +21,15 @@ import com.example.electronicstoremobileapp.R;
  */
 public class ShopProductListFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    FragmentShopProductListBinding binding;
+    public NavController navController;
 
     public ShopProductListFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ShopProductListFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ShopProductListFragment newInstance(String param1, String param2) {
+
+    public static ShopProductListFragment newInstance() {
         ShopProductListFragment fragment = new ShopProductListFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -50,15 +40,25 @@ public class ShopProductListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+                             Bundle savedInstanceState) {
+        binding = FragmentShopProductListBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+
         return inflater.inflate(R.layout.fragment_shop_product_list, container, false);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
+    private void navigateToFragment(int fragmentId) {
+        navController.navigate(fragmentId);
     }
 }
