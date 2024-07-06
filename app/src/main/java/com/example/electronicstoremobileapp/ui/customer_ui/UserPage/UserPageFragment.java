@@ -21,6 +21,8 @@ import com.example.electronicstoremobileapp.ui.customer_ui.HomePage.HomePageFrag
  */
 public class UserPageFragment extends Fragment {
 
+    private final String testUserId = ""; //Add user id for pre-test
+
     FragmentUserPageBinding binding;
     public NavController navController;
 

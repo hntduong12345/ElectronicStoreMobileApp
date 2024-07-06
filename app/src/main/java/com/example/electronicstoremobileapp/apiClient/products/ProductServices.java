@@ -13,6 +13,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 //@Header("Content-Type:application/json")
 public interface ProductServices {
@@ -36,4 +37,7 @@ public interface ProductServices {
     @Multipart
     @PUT("api/Product/{productId}")
     Call<ProductDto> Update(@Path("productId") String productId);
+
+    @GET("api/Product/category")
+    Call<List<ProductDto>> GetProductbyCategory(@Query("categoryId") String categoryId, @Query("start") int start , @Query("pageSize") int pageSize);
 }

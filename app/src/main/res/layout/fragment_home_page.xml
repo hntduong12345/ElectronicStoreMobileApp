@@ -44,7 +44,7 @@
                     android:paddingTop="28dp"
                     android:paddingEnd="10dp"
                     android:paddingBottom="0dp"
-                    android:text="Sale"
+                    android:text="New"
                     android:textAlignment="viewStart"
                     android:textSize="36sp"
                     android:textStyle="bold" />
@@ -67,7 +67,7 @@
                     android:paddingTop="28dp"
                     android:paddingEnd="10dp"
                     android:paddingBottom="0dp"
-                    android:text="New"
+                    android:text="Feature"
                     android:textAlignment="viewStart"
                     android:textSize="36sp"
                     android:textStyle="bold" />

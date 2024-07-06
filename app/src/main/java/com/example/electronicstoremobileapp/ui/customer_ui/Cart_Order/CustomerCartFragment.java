@@ -58,10 +58,10 @@ public class CustomerCartFragment extends Fragment {
         binding = FragmentCustomerCartBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         NavHostFragment navHostFragment = (NavHostFragment) getChildFragmentManager()
-                .findFragmentById(R.id.nav_host_fragment_customer_cart);
+                .findFragmentById(com.example.electronicstoremobileapp.R.id.nav_host_fragment_customer_cart);
         NavController navController = navHostFragment.getNavController();
         this.navController = navController;
-        navigateToFragment(R.id.customerCartFragment);
+        navigateToFragment(R.id.cartPageFragment);
         return view;
     }
 
