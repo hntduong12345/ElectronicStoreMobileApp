@@ -10,7 +10,7 @@ import android.widget.ImageView;
 
 import com.example.electronicstoremobileapp.R;
 import com.example.electronicstoremobileapp.databinding.ListviewitemAdminProductListItemBinding;
-import com.example.electronicstoremobileapp.models.ProductDto;
+import com.example.electronicstoremobileapp.models.products.ProductDto;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

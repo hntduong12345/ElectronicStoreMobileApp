@@ -61,10 +61,10 @@
 
         <ListView
             android:id="@+id/listViewCategoryProduct"
-            android:layout_width="415dp"
-            android:layout_height="570dp"
+            android:layout_width="411dp"
+            android:layout_height="553dp"
             android:layout_marginTop="40dp"
-            android:layout_marginBottom="53dp"
+            android:layout_marginBottom="70dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

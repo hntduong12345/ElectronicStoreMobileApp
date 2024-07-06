@@ -9,8 +9,7 @@ import android.widget.ImageView;
 
 import com.example.electronicstoremobileapp.R;
 import com.example.electronicstoremobileapp.databinding.ComponentProductViewBinding;
-import com.example.electronicstoremobileapp.databinding.ListviewitemAdminProductListItemBinding;
-import com.example.electronicstoremobileapp.models.ProductDto;
+import com.example.electronicstoremobileapp.models.products.ProductDto;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -25,6 +24,7 @@ public class ProductAdapter extends BaseAdapter {
         this.parentContext = parentContext;
         this.productLists = productLists;
         this.layoutId = layoutId;
+        this.layoutInflater = LayoutInflater.from(parentContext);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.electronicstoremobileapp.apiClient.products;
 
-import com.example.electronicstoremobileapp.models.ProductDto;
+import com.example.electronicstoremobileapp.models.products.CategoryProductDto;
+import com.example.electronicstoremobileapp.models.products.ProductDto;
 
 import java.util.List;
 
@@ -39,5 +40,5 @@ public interface ProductServices {
     Call<ProductDto> Update(@Path("productId") String productId);
 
     @GET("api/Product/category")
-    Call<List<ProductDto>> GetProductbyCategory(@Query("categoryId") String categoryId, @Query("start") int start , @Query("pageSize") int pageSize);
+    Call<CategoryProductDto> GetProductbyCategory(@Query("categoryId") String categoryId, @Query("start") int start , @Query("pageSize") int pageSize);
 }

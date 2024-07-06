@@ -28,7 +28,7 @@ import com.example.electronicstoremobileapp.apiClient.ApiClient;
 import com.example.electronicstoremobileapp.apiClient.categories.CategoryServices;
 import com.example.electronicstoremobileapp.databinding.FragmentAdminProductUpdateBinding;
 import com.example.electronicstoremobileapp.models.CategoryDto;
-import com.example.electronicstoremobileapp.models.ProductDto;
+import com.example.electronicstoremobileapp.models.products.ProductDto;
 
 import java.time.LocalDateTime;
 import java.util.List;

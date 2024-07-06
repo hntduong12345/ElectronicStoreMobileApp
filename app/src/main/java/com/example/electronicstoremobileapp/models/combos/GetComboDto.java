@@ -1,6 +1,6 @@
 package com.example.electronicstoremobileapp.models.combos;
 
-import com.example.electronicstoremobileapp.models.ProductDto;
+import com.example.electronicstoremobileapp.models.products.ProductDto;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

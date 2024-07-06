@@ -19,7 +19,7 @@ import com.example.electronicstoremobileapp.admins.ui.products.viewElements.Prod
 import com.example.electronicstoremobileapp.apiClient.ApiClient;
 import com.example.electronicstoremobileapp.apiClient.products.ProductServices;
 import com.example.electronicstoremobileapp.databinding.FragmentAdminProductListBinding;
-import com.example.electronicstoremobileapp.models.ProductDto;
+import com.example.electronicstoremobileapp.models.products.ProductDto;
 
 import java.util.ArrayList;
 import java.util.List;
