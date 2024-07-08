@@ -7,6 +7,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -42,6 +43,8 @@ public class ProductDetailFragment extends Fragment {
 
     SharedPreferences sharedPreferences;
 
+    List<Cart> cart;
+
     public ProductDetailFragment() {
         // Required empty public constructor
     }
@@ -74,7 +77,19 @@ public class ProductDetailFragment extends Fragment {
 
         BindToView();
 
+        fetchCartData();
         return view;
+    }
+
+    private void fetchCartData(){
+        cart = new ArrayList<>();
+        cart.clear();
+        Gson gson = new Gson();
+        String dataJson = sharedPreferences.getString("CartObject", "");
+        if (!TextUtils.equals(dataJson, "[]") && !TextUtils.isEmpty(dataJson)) {
+            CartList localCartList = gson.fromJson(dataJson, CartList.class);
+            cart = localCartList.cartList;
+        }
     }
 
     @Override
@@ -83,7 +98,6 @@ public class ProductDetailFragment extends Fragment {
         binding.buttonAddToCartPDP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                List<Cart> cart = new ArrayList<>();
                 cart.add(new Cart(product, 1));
 
                 Gson gson = new Gson();

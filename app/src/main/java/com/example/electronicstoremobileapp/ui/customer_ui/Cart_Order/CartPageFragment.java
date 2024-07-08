@@ -7,9 +7,11 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.electronicstoremobileapp.Adapters.cart.CartAdapter;
 import com.example.electronicstoremobileapp.R;
@@ -19,6 +21,7 @@ import com.example.electronicstoremobileapp.models.Cart;
 import com.example.electronicstoremobileapp.models.CartList;
 import com.example.electronicstoremobileapp.ui.customer_ui.HomePage.HomePageFragment;
 import com.google.gson.Gson;
+import com.google.gson.JsonParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +40,8 @@ public class CartPageFragment extends Fragment {
     CartAdapter cartAdapter;
     SharedPreferences sharedPreferences;
     Context currentContext;
+
+    Gson gson = new Gson();
 
     public CartPageFragment() {
         // Required empty public constructor
@@ -67,20 +72,44 @@ public class CartPageFragment extends Fragment {
 
         cartList = new ArrayList<>();
         sharedPreferences = getActivity().getSharedPreferences("CartData", Context.MODE_PRIVATE);
+        fetchData();
 
-        return inflater.inflate(R.layout.fragment_cart_page, container, false);
+        return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        binding.buttonClearCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cartList.clear();
+                cartAdapter.notifyDataSetChanged();
+                updateLocalData();
+            }
+        });
     }
 
     private void fetchData() {
         cartList.clear();
-        Gson gson = new Gson();
         String dataJson = sharedPreferences.getString("CartObject", "");
-        CartList localCartList = gson.fromJson(dataJson, CartList.class);
 
-        cartList = localCartList.cartList;
-        cartAdapter = new CartAdapter(currentContext, cartList, R.layout.component_cart_item_row);
-        binding.listViewListCart.setAdapter(cartAdapter);
-        cartAdapter.notifyDataSetChanged();
+        if (!TextUtils.equals(dataJson, "[]") && !TextUtils.isEmpty(dataJson)) {
+            CartList localCartList = gson.fromJson(dataJson, CartList.class);
+            cartList = localCartList.cartList;
+
+            cartAdapter = new CartAdapter(currentContext, cartList, R.layout.component_cart_item_row);
+            binding.listViewListCart.setAdapter(cartAdapter);
+            cartAdapter.notifyDataSetChanged();
+        }
+    }
+
+    public void updateLocalData() {
+        String jsonData = gson.toJson(cartList);
+
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("CartObject", jsonData);
+        editor.commit();
     }
 
     @Override
