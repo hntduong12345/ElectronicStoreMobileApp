@@ -41,4 +41,7 @@ public interface ProductServices {
 
     @GET("api/Product/category")
     Call<CategoryProductDto> GetProductbyCategory(@Query("categoryId") String categoryId, @Query("start") int start , @Query("pageSize") int pageSize);
+
+    @GET("api/Product/range")
+    Call<CategoryProductDto> GetRange(@Query("start") int start , @Query("pageSize") int pageSize);
 }

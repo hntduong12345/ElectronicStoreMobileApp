@@ -1,5 +1,7 @@
 package com.example.electronicstoremobileapp.ui.customer_ui.ShopPage.ProductUI;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,14 +11,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.example.electronicstoremobileapp.R;
 import com.example.electronicstoremobileapp.databinding.FragmentCartPageBinding;
 import com.example.electronicstoremobileapp.databinding.FragmentProductDetailBinding;
 import com.example.electronicstoremobileapp.models.AccountDto;
+import com.example.electronicstoremobileapp.models.Cart;
+import com.example.electronicstoremobileapp.models.CartList;
 import com.example.electronicstoremobileapp.models.products.ProductDto;
 import com.example.electronicstoremobileapp.ui.customer_ui.Cart_Order.CartPageFragment;
+import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +38,9 @@ public class ProductDetailFragment extends Fragment {
     public NavController navController;
 
     ProductDto product;
+    Context currentContext;
+
+    SharedPreferences sharedPreferences;
 
     public ProductDetailFragment() {
         // Required empty public constructor
@@ -57,9 +69,31 @@ public class ProductDetailFragment extends Fragment {
         binding = FragmentProductDetailBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
+        sharedPreferences = getActivity().getSharedPreferences("CartData", Context.MODE_PRIVATE);
+        currentContext = this.currentContext;
+
         BindToView();
 
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        binding.buttonAddToCartPDP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                List<Cart> cart = new ArrayList<>();
+                cart.add(new Cart(product, 1));
+
+                Gson gson = new Gson();
+                String jsonData = gson.toJson(new CartList(cart));
+
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("CartObject", jsonData);
+                editor.commit();
+            }
+        });
     }
 
     private void BindToView(){

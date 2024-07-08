@@ -43,7 +43,7 @@
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/listView2">
+            app:layout_constraintTop_toBottomOf="@+id/listViewListCart">
 
             <TextView
                 android:id="@+id/textView9"
@@ -105,7 +105,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ListView
-            android:id="@+id/listView2"
+            android:id="@+id/listViewListCart"
             android:layout_width="406dp"
             android:layout_height="357dp"
             android:layout_marginStart="1dp"
