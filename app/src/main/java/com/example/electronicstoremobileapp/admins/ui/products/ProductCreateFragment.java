@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -37,6 +39,8 @@ import com.example.electronicstoremobileapp.models.ProductDto;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
 import java.io.IOException;
@@ -98,7 +102,12 @@ public class ProductCreateFragment extends Fragment {
         toolbar = binding.toolbarCreate;
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
         toolbar.setTitle("Create Product");
-
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toolbarNavClick(v);
+            }
+        });
         dropdownCategory = binding.dropdownCategories;
         ArrayAdapter<CategoryDto> adapter = new ArrayAdapter<>(this.getContext(), android.R.layout.simple_spinner_item, categoryDtoList);
         adapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
@@ -122,52 +131,80 @@ public class ProductCreateFragment extends Fragment {
                 imageChooser();
             }
         });
-        binding.btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavHostFragment parentFragment = (NavHostFragment) getParentFragment();
-                if (parentFragment != null) {
-                    NavController navController = parentFragment.getNavController();
-                    navController.navigate(R.id.action_navigation_product_create_to_navigation_product);
-                }
-//                NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_activity_main);
-//                navController.navigate(R.id.action_navigation_product_create_to_navigation_product);
-            }
-        });
         fetchData();
 
         binding.btnCreateProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                bindToNewModel();
-                Validator<CreateProductDto> validator = new CreateProductDto.CreateProductDtoValidator();
-                ValidationResult result = validator.validate(newProductModel);
-                if (false) {
-                    //if (result.isValid() == false) {
-                    ScrollView scrollView = binding.scrollViewError;
-                    LinearLayout scollviewErrorLayout = (LinearLayout) scrollView.getChildAt(0);
-                    scollviewErrorLayout.removeAllViews();
-                    for (Error err : result.getErrors()) {
-                        TextView txtError = new TextView(getContext());
-                        txtError.setLayoutParams(new LinearLayout.LayoutParams(
-                                LinearLayout.LayoutParams.MATCH_PARENT,
-                                LinearLayout.LayoutParams.WRAP_CONTENT
-                        ));
-                        txtError.setBackgroundColor(Color.WHITE);
-                        txtError.setTextColor(Color.RED);
-                        txtError.setText("Field: " + err.getField() + " | message: " + err.getMessage());
-                        scollviewErrorLayout.addView(txtError);
-                    }
-                } else {
-                    binding.scollviewErrorLayout.removeAllViews();
-                    onCreateClick();
-                }
+                binding.scollviewErrorLayout.removeAllViews();
+                onCreateClick();
+//                bindToNewModel();
+//                Validator<CreateProductDto> validator = new CreateProductDto.CreateProductDtoValidator();
+//                ValidationResult result = validator.validate(newProductModel);
+//                if (false) {
+//                    //if (result.isValid() == false) {
+//                    ScrollView scrollView = binding.scrollViewError;
+//                    LinearLayout scollviewErrorLayout = (LinearLayout) scrollView.getChildAt(0);
+//                    scollviewErrorLayout.removeAllViews();
+//                    for (Error err : result.getErrors()) {
+//                        TextView txtError = new TextView(getContext());
+//                        txtError.setLayoutParams(new LinearLayout.LayoutParams(
+//                                LinearLayout.LayoutParams.MATCH_PARENT,
+//                                LinearLayout.LayoutParams.WRAP_CONTENT
+//                        ));
+//                        txtError.setBackgroundColor(Color.WHITE);
+//                        txtError.setTextColor(Color.RED);
+//                        txtError.setText("Field: " + err.getField() + " | message: " + err.getMessage());
+//                        scollviewErrorLayout.addView(txtError);
+//                    }
+//                } else {
+//                    binding.scollviewErrorLayout.removeAllViews();
+//                    onCreateClick();
+//                }
             }
         });
         return root;
         //return inflater.inflate(R.layout.fragment_product_create, container, false);
     }
-
+    // this function is triggered when user
+    // selects the image from the imageChooser
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            // compare the resultCode with the
+            // SELECT_PICTURE constant
+            if (requestCode == AppConstant.SELECT_PICTURE_CODE) {
+                // Get the url of the image from data
+                Uri selectedImageUri = data.getData();
+                if (null != selectedImageUri) {
+                    // update the preview image in the layout
+                    binding.imgSelectedImage.setImageURI(selectedImageUri);
+                    binding.imgSelectedImage.setTag(R.string.IMAGE_VIEW_TAG_URI, selectedImageUri.toString());
+                }
+            }
+        }
+    }
+    private void addNewErrorToErrorList(String field, String message){
+        ScrollView scrollView = binding.scrollViewError;
+        LinearLayout scollviewErrorLayout = (LinearLayout) scrollView.getChildAt(0);
+        TextView txtError = new TextView(getContext());
+        txtError.setLayoutParams(new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT
+        ));
+        txtError.setBackgroundColor(Color.WHITE);
+        txtError.setTextColor(Color.RED);
+        txtError.setText("" + field + " || " + message);
+        scollviewErrorLayout.addView(txtError);
+    }
+    private void toolbarNavClick(View view) {
+        NavHostFragment parentFragment = (NavHostFragment) getParentFragment();
+        if (parentFragment != null) {
+            NavController navController = parentFragment.getNavController();
+            navController.navigate(R.id.action_navigation_product_create_to_navigation_product);
+        }
+    }
     private void fetchData() {
         Call<List<CategoryDto>> getCategories = ApiClient.getServiceClient(CategoryServices.class).GetAll();
         getCategories.enqueue(new Callback<List<CategoryDto>>() {
@@ -195,7 +232,6 @@ public class ProductCreateFragment extends Fragment {
             }
         });
     }
-
     private void imageChooser() {
         // create an instance of the
         // intent of the type image
@@ -208,27 +244,6 @@ public class ProductCreateFragment extends Fragment {
         Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(intent, AppConstant.SELECT_PICTURE_CODE);
     }
-
-    // this function is triggered when user
-    // selects the image from the imageChooser
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK) {
-            // compare the resultCode with the
-            // SELECT_PICTURE constant
-            if (requestCode == AppConstant.SELECT_PICTURE_CODE) {
-                // Get the url of the image from data
-                Uri selectedImageUri = data.getData();
-                if (null != selectedImageUri) {
-                    // update the preview image in the layout
-                    binding.imgSelectedImage.setImageURI(selectedImageUri);
-                    binding.imgSelectedImage.setTag(R.string.IMAGE_VIEW_TAG_URI, selectedImageUri.toString());
-                }
-            }
-        }
-    }
-
     private void bindToNewModel() {
         newProductModel.CategoryId = ((CategoryDto) dropdownCategory.getSelectedItem()).CategoryId;
         newProductModel.StorageAmount = Integer.valueOf(binding.edtStorageAmount.getText().toString());
@@ -276,8 +291,53 @@ public class ProductCreateFragment extends Fragment {
         File file = new File(filePath);
         return file;
     }
+    private boolean validateField(){
+        CreateProductDto model = newProductModel;
+        boolean isValid = true;
+        String productName = model.ProductName;
+        String description = model.Description;
+        String categoryId = model.CategoryId;
+        String manufacturer= model.Manufacturer;
+        int storageAmount = model.StorageAmount;
+        double defaultPrice = model.DefaultPrice;
+        File imageFile = model.ImageFile;
+        if (StringUtils.isBlank(productName) || productName.length() <= 1 ) {
+            binding.edtProductName.setError("product name must not null and length > 1 ");
+            isValid = false;
+        }
 
+        if (StringUtils.isBlank(description) || description.isEmpty()) {
+            binding.edtDescription.setError("description must not empty");
+            isValid = false;
+        }
+        if (StringUtils.isBlank(categoryId)) {
+            addNewErrorToErrorList("category id", "category is null");
+            isValid = false;
+        }
+        if (StringUtils.isBlank(manufacturer)) {
+            binding.edtManufacturer.setError("manufacturer must not empty");
+            isValid = false;
+        }
+        if (storageAmount < 0 || storageAmount > 100000) {
+            binding.edtStorageAmount.setError("storageAmount must be at least 0 and < 10000");
+            isValid = false;
+        }
+        if (defaultPrice < 0 || defaultPrice > 900000000.0) {
+            binding.edtDefaultPrice.setError("defaultPrice > 0 and less then 900 million");
+            isValid = false;
+        }
+        if (imageFile == null){
+            addNewErrorToErrorList("image file", "image file is empty, please add an image");
+        }
+        return isValid;
+    }
     private void onCreateClick() {
+        bindToNewModel();
+        boolean validateResultSuccess = validateField();
+        if(validateResultSuccess == false ){
+            Toast.makeText(this.getContext(),"validation error",Toast.LENGTH_SHORT).show();
+            return;
+        }
         File imageFile = newProductModel.ImageFile;
         RequestBody requestFile = RequestBody.create(MediaType.parse("image/png"), imageFile);
         MultipartBody.Part imageMultipart = MultipartBody.Part.createFormData("ImageFile", imageFile.getName(), requestFile);
@@ -302,11 +362,11 @@ public class ProductCreateFragment extends Fragment {
             public void onResponse(Call<ProductDto> call, Response<ProductDto> response) {
                 if (response.isSuccessful()) {
                     Log.w("CREATE SUCCESS", "Create success");
-                    binding.btnBack.callOnClick();
+//                    binding.btnBack.callOnClick();
+                    toolbarNavClick(new View(getContext()));
                 } else {
                     try {
                         Gson gson = new GsonBuilder().create();
-                        ;
                         String errorBody = response.errorBody().string();
                         JsonParser.parseString(errorBody);
                     } catch (IOException e) {
@@ -323,10 +383,5 @@ public class ProductCreateFragment extends Fragment {
             }
         });
 
-    }
-
-    private void navigateBack() {
-        NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_activity_main);
-        navController.navigate(R.id.action_navigation_product_create_to_navigation_product);
     }
 }

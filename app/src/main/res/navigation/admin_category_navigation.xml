@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/navigation_category_list"
+    android:id="@+id/admin_category_navigation">
+    <fragment
+        android:id="@+id/navigation_category"
+        android:name="com.example.electronicstoremobileapp.admins.ui.categories.CategoryFragment"
+        android:label="@string/title_category"
+        tools:layout="@layout/fragment_admin_category" >
+        <action
+            android:id="@+id/action_navigation_category_to_navigation_category_list"
+            app:destination="@id/navigation_category_list" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_category_list"
+        android:name="com.example.electronicstoremobileapp.admins.ui.categories.CategoryFragmentList"
+        android:label="@string/title_category"
+        tools:layout="@layout/fragment_admin_category_list">
+
+        <action
+            android:id="@+id/action_navigation_category_list_to_navigation_category_create"
+            app:destination="@id/navigation_category_create" />
+        <action
+            android:id="@+id/action_navigation_category_list_to_navigation_category_update"
+            app:destination="@id/navigation_category_update" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_category_create"
+        android:name="com.example.electronicstoremobileapp.admins.ui.categories.CategoryFragmentCreate"
+        android:label="@string/title_category"
+        tools:layout="@layout/fragment_admin_category_create">
+
+        <action
+            android:id="@+id/action_navigation_category_create_to_navigation_category"
+            app:destination="@id/navigation_category" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_category_update"
+        android:name="com.example.electronicstoremobileapp.admins.ui.categories.CategoryFragmentUpdate"
+        android:label="@string/title_category"
+        tools:layout="@layout/fragment_admin_category_update">
+
+        <action
+            android:id="@+id/action_navigation_category_update_to_navigation_category"
+            app:destination="@id/navigation_category" />
+    </fragment>
+</navigation>

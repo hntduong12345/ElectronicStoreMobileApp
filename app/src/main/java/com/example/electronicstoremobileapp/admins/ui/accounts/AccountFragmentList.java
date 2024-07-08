@@ -81,12 +81,12 @@ public class AccountFragmentList extends Fragment {
                 fetchAllAdmin();
             }
         });
-        binding.btnGetAllStaff.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                fetchAllStaff();
-            }
-        });
+//        binding.btnGetAllStaff.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                fetchAllStaff();
+//            }
+//        });
         binding.btnGetAllUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,7 +96,7 @@ public class AccountFragmentList extends Fragment {
 
         accountLists = new ArrayList<AccountDto>();
         //binding.btnGetAllStaff.callOnClick();
-        fetchAllStaff();
+        fetchAllAdmin();
         accountListViewAdapter = new AccountListViewAdapter(this.getContext(), accountLists, R.layout.listviewitem_admin_account_list_item, this.parentFragment);
         binding.fragmentAccountListView.setAdapter(accountListViewAdapter);
 
@@ -128,10 +128,10 @@ public class AccountFragmentList extends Fragment {
         fecthData(call);
     }
 
-    private void fetchAllStaff() {
-        Call<List<AccountDto>> call = ApiClient.getServiceClient(AccountServices.class).GetAllStaff();
-        fecthData(call);
-    }
+//    private void fetchAllStaff() {
+//        Call<List<AccountDto>> call = ApiClient.getServiceClient(AccountServices.class).GetAllStaff();
+//        fecthData(call);
+//    }
 
     private void fecthData(Call<List<AccountDto>> call) {
         //Call<List<AccountDto>> call = ApiClient.getServiceClient(AccountServices.class);

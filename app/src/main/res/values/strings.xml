@@ -15,6 +15,8 @@
     <string name="title_home">Home</string>
     <string name="title_product">Product</string>
     <string name="title_category">Category</string>
+    <string name="title_voucher">Voucher</string>
     <string name="title_account">Account</string>
+    <string name="title_profile">Profile</string>
     <string name="IMAGE_VIEW_TAG_URI">1111</string>
 </resources>

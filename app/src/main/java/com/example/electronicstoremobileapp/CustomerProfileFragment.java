@@ -1,16 +1,14 @@
 package com.example.electronicstoremobileapp;
 
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
-import com.example.electronicstoremobileapp.Authentication.AuthenActivity;
+import androidx.fragment.app.Fragment;
+
+import com.example.electronicstoremobileapp.Utility.UserLoggingUtil;
+import com.example.electronicstoremobileapp.databinding.FragmentCustomerProfileBinding;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,6 +16,7 @@ import com.example.electronicstoremobileapp.Authentication.AuthenActivity;
  * create an instance of this fragment.
  */
 public class CustomerProfileFragment extends Fragment {
+    FragmentCustomerProfileBinding binding;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,7 +37,7 @@ public class CustomerProfileFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment CustomerProfileFragment.
+     * @return A new instance of fragment OrderFragment.
      */
     // TODO: Rename and change types and number of parameters
     public static CustomerProfileFragment newInstance() {
@@ -61,15 +60,15 @@ public class CustomerProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_customer_profile, container, false);
-//        Button login = (Button) view.findViewById(R.id.buttonSignUp);
-//        login.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getActivity(), AuthenActivity.class);
-//                startActivity(intent);
-//            }
-//        });
+        binding = FragmentCustomerProfileBinding.inflate(inflater, container, false);
+        View view = binding.getRoot();
+        binding.BtnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserLoggingUtil.LogOut(getContext());
+                getActivity().finish();
+            }
+        });
         return view;
     }
 }

@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/topbar_height"
         android:background="@color/teal_700"
+        app:navigationIcon="@drawable/baseline_arrow_back_24"
         android:title="Update"
         app:layout_constraintStart_toStartOf="parent"
         app:titleTextColor="@color/white"
@@ -104,32 +105,31 @@
             <Spinner
                 android:id="@+id/dropdownCategories"
                 android:layout_margin="0dp"
-                android:textAlignment="center"
-                android:layout_width="140dp"
+                android:layout_width="match_parent"
                 android:spinnerMode="dropdown"
                 android:layout_height="wrap_content"></Spinner>
 
-            <CheckBox
-                android:id="@+id/chkboxIsOnSale"
-                android:layout_width="wrap_content"
-                android:text="is sale"
-                android:layout_height="20dp">
+<!--            <CheckBox-->
+<!--                android:id="@+id/chkboxIsOnSale"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:text="is sale"-->
+<!--                android:layout_height="20dp">-->
 
-            </CheckBox>
+<!--            </CheckBox>-->
 
-            <Button
-                android:id="@+id/btnChooseTime"
-                android:backgroundTint="@color/teal_700"
-                android:text="time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></Button>
+<!--            <Button-->
+<!--                android:id="@+id/btnChooseTime"-->
+<!--                android:backgroundTint="@color/teal_700"-->
+<!--                android:text="time"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"></Button>-->
 
-            <Button
-                android:id="@+id/btnChooseDate"
-                android:backgroundTint="@color/teal_700"
-                android:text="Date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></Button>
+<!--            <Button-->
+<!--                android:id="@+id/btnChooseDate"-->
+<!--                android:backgroundTint="@color/teal_700"-->
+<!--                android:text="Date"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"></Button>-->
 
         </LinearLayout>
 
@@ -162,14 +162,7 @@
             android:backgroundTint="@color/teal_700"
             android:text="Update" />
 
-        <Button
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:id="@+id/btnBack"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/teal_700"
-            android:text="Back" />
+
 
         <ScrollView
             android:id="@+id/scrollViewError"

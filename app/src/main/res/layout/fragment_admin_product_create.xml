@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/topbar_height"
         android:background="@color/teal_700"
+        app:navigationIcon="@drawable/baseline_arrow_back_24"
         android:title="Create"
         app:layout_constraintStart_toStartOf="parent"
         app:titleTextColor="@color/white"
@@ -19,35 +20,35 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="@dimen/topbar_height"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:padding="10dp"
-            android:orientation="horizontal"
+            android:layout_height="wrap_content"
             android:gravity="center"
-            android:layout_height="wrap_content">
+            android:orientation="horizontal"
+            android:padding="10dp">
 
             <Button
                 android:id="@+id/btnSelectImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:text="Select Image"
-                android:backgroundTint="@color/teal_700">
+                android:backgroundTint="@color/teal_700"
+                android:text="Select Image">
 
             </Button>
 
             <ImageView
                 android:id="@+id/imgSelectedImage"
                 android:layout_width="100dp"
-                android:src="@drawable/baseline_plus_one_24"
-                android:layout_height="100dp"></ImageView>
+                android:layout_height="100dp"
+                android:src="@drawable/baseline_plus_one_24"></ImageView>
         </LinearLayout>
 
         <EditText
@@ -55,8 +56,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="text"
             android:hint="name"
+            android:inputType="text"
             android:text="" />
 
         <EditText
@@ -64,26 +65,26 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="text"
             android:hint="description"
+            android:inputType="text"
             android:text="" />
 
         <EditText
             android:id="@+id/edtDefaultPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="default price"
             android:ems="10"
+            android:hint="default price"
             android:inputType="numberDecimal|number"
             android:text="" />
 
         <Spinner
             android:id="@+id/dropdownCategories"
-            android:layout_margin="20dp"
-            android:textAlignment="center"
             android:layout_width="match_parent"
-            android:spinnerMode="dropdown"
-            android:layout_height="wrap_content">
+
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:spinnerMode="dropdown">
 
         </Spinner>
 
@@ -92,8 +93,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:inputType="text"
             android:hint="manufacturer"
+            android:inputType="text"
             android:text="" />
 
         <EditText
@@ -102,27 +103,18 @@
             android:layout_height="wrap_content"
             android:ems="10"
             android:hint="storage amount"
-            android:inputType="text"
+            android:inputType="number"
             android:text="Name" />
 
         <Button
             android:id="@+id/btnCreateProduct"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="0dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:backgroundTint="@color/teal_700"
             android:text="Create" />
-
-        <Button
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:id="@+id/btnBack"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/teal_700"
-            android:text="Back" />
 
         <ScrollView
             android:id="@+id/scrollViewError"
