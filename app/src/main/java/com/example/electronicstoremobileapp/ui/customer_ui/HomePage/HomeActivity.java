@@ -43,9 +43,10 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_home);
+        //setContentView(R.layout.activity_home);
 
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationViewHomeNav);
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration

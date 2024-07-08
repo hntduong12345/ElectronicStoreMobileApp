@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/customer_parent_navigation"
-    app:startDestination="@id/homePageFragment2">
+    app:startDestination="@id/customerHomeFragment2">
     <fragment
         android:id="@+id/customerCartFragment2"
         android:name="com.example.electronicstoremobileapp.ui.customer_ui.Cart_Order.CustomerCartFragment"
