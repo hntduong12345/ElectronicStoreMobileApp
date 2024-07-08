@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import androidx.navigation.fragment.NavHostFragment;
+
 import com.example.electronicstoremobileapp.R;
 import com.example.electronicstoremobileapp.models.CategoryDto;
 
@@ -17,10 +19,14 @@ public class CategoryAdapter extends BaseAdapter {
     private int layout;
     private List<CategoryDto> categoryList;
 
-    public CategoryAdapter(Context context, int layout, List<CategoryDto> categoryList) {
+    LayoutInflater layoutInflater;
+    NavHostFragment parentNavigationFragment;
+
+    public CategoryAdapter(Context context, int layout, List<CategoryDto> categoryList, NavHostFragment parentNavigationFragment) {
         this.context = context;
         this.layout = layout;
         this.categoryList = categoryList;
+        this.parentNavigationFragment = parentNavigationFragment;
     }
 
     @Override
@@ -45,7 +51,7 @@ public class CategoryAdapter extends BaseAdapter {
 
         TextView tv_CategoryName = convertView.findViewById(R.id.textViewCategoryRowName);
         CategoryDto category = categoryList.get(position);
-        tv_CategoryName.setText(category.CategoryName);
+        tv_CategoryName.setText(category.getCategoryName());
 
         return convertView;
     }

@@ -38,7 +38,7 @@ public class CustomerShopFragment extends Fragment {
      * @return A new instance of fragment CustomerHomeFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static CustomerShopFragment newInstance(String param1, String param2) {
+    public static CustomerShopFragment newInstance() {
         CustomerShopFragment fragment = new CustomerShopFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -61,7 +61,7 @@ public class CustomerShopFragment extends Fragment {
                 .findFragmentById(R.id.nav_host_fragment_customer_shop);
         NavController navController = navHostFragment.getNavController();
         this.navController = navController;
-        navigateToFragment(R.id.customerShopFragment);
+        navigateToFragment(R.id.shopPageFragment);
         return view;
     }
 

@@ -37,23 +37,22 @@ import java.util.List;
 public class HomeActivity extends AppCompatActivity {
 
     private ActivityHomeBinding binding;
-    private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        //setContentView(R.layout.activity_home);
 
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavigationViewHomeNav);
+        BottomNavigationView navViewCustomer = (BottomNavigationView) findViewById(R.id.nav_view_customer);
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration
                 .Builder(R.id.nav_home, R.id.nav_shop, R.id.nav_cart, R.id.nav_person)
                 .build();
-        NavController navController = Navigation.findNavController(this, R.id.customer_nav_view);
-        NavigationUI.setupWithNavController(binding.bottomNavigationViewHomeNav, navController);
+
+
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_customer);
+        NavigationUI.setupWithNavController(binding.navViewCustomer, navController);
 
         //Check permission
         if (allPermissionsGranted() == false) {

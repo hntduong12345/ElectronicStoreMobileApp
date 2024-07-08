@@ -57,4 +57,27 @@ public class CategoryDto implements Parcelable {
             return new CategoryDto[size];
         }
     };
+    public String getCategoryId() {
+        return CategoryId;
+    }
+
+    public void setCategoryId(String categoryId) {
+        CategoryId = categoryId;
+    }
+
+    public String getCategoryName() {
+        return CategoryName;
+    }
+
+    public void setCategoryName(String categoryName) {
+        CategoryName = categoryName;
+    }
+
+    public String getCategoryDescription() {
+        return CategoryDescription;
+    }
+
+    public void setCategoryDescription(String categoryDescription) {
+        CategoryDescription = categoryDescription;
+    }
 }

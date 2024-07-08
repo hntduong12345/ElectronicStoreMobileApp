@@ -35,7 +35,7 @@ import com.example.electronicstoremobileapp.apiClient.categories.CategoryService
 import com.example.electronicstoremobileapp.apiClient.products.ProductServices;
 import com.example.electronicstoremobileapp.databinding.FragmentAdminProductCreateBinding;
 import com.example.electronicstoremobileapp.models.CategoryDto;
-import com.example.electronicstoremobileapp.models.ProductDto;
+import com.example.electronicstoremobileapp.models.products.ProductDto;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParser;

@@ -1,5 +1,7 @@
 package com.example.electronicstoremobileapp.ui.customer_ui.Cart_Order;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,10 +11,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.electronicstoremobileapp.Adapters.cart.CartAdapter;
 import com.example.electronicstoremobileapp.R;
 import com.example.electronicstoremobileapp.databinding.FragmentCartPageBinding;
 import com.example.electronicstoremobileapp.databinding.FragmentHomePageBinding;
+import com.example.electronicstoremobileapp.models.Cart;
+import com.example.electronicstoremobileapp.models.CartList;
 import com.example.electronicstoremobileapp.ui.customer_ui.HomePage.HomePageFragment;
+import com.google.gson.Gson;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -23,6 +32,11 @@ public class CartPageFragment extends Fragment {
 
     FragmentCartPageBinding binding;
     public NavController navController;
+
+    List<Cart> cartList;
+    CartAdapter cartAdapter;
+    SharedPreferences sharedPreferences;
+    Context currentContext;
 
     public CartPageFragment() {
         // Required empty public constructor
@@ -49,8 +63,24 @@ public class CartPageFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentCartPageBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+        currentContext = this.getContext();
+
+        cartList = new ArrayList<>();
+        sharedPreferences = getActivity().getSharedPreferences("CartData", Context.MODE_PRIVATE);
 
         return inflater.inflate(R.layout.fragment_cart_page, container, false);
+    }
+
+    private void fetchData() {
+        cartList.clear();
+        Gson gson = new Gson();
+        String dataJson = sharedPreferences.getString("CartObject", "");
+        CartList localCartList = gson.fromJson(dataJson, CartList.class);
+
+        cartList = localCartList.cartList;
+        cartAdapter = new CartAdapter(currentContext, cartList, R.layout.component_cart_item_row);
+        binding.listViewListCart.setAdapter(cartAdapter);
+        cartAdapter.notifyDataSetChanged();
     }
 
     @Override
