@@ -19,6 +19,7 @@ import com.example.electronicstoremobileapp.apiClient.ApiClient;
 import com.example.electronicstoremobileapp.apiClient.products.ProductServices;
 import com.example.electronicstoremobileapp.databinding.FragmentShopProductListBinding;
 import com.example.electronicstoremobileapp.models.CategoryDto;
+import com.example.electronicstoremobileapp.models.PagingResponseDto;
 import com.example.electronicstoremobileapp.models.ProductDto;
 
 
@@ -98,16 +99,16 @@ public class ShopProductListFragment extends Fragment {
     }
 
     private void fecthData(){
-        Call<CategoryDto> call = ApiClient.getServiceClient(ProductServices.class).GetProductbyCategory(categoryId,0,50);
-        call.enqueue(new Callback<CategoryDto>() {
+        Call<PagingResponseDto<ProductDto>> call = ApiClient.getServiceClient(ProductServices.class).GetProductbyCategory(categoryId,0,50);
+        call.enqueue(new Callback<PagingResponseDto<ProductDto>>() {
             @Override
-            public void onResponse(Call<CategoryDto> call, Response<CategoryDto> response) {
+            public void onResponse(Call<PagingResponseDto<ProductDto>> call, Response<PagingResponseDto<ProductDto>> response) {
                 int code = response.code();
                 if (code < 200 || code > 300 || response.body() == null) {
                     Log.println(Log.ERROR, "API ERROR", "Error in fecth products with status code " + code);
                     return;
                 }
-                CategoryDto responseBody = response.body();
+                PagingResponseDto<ProductDto> responseBody = response.body();
                 productList.clear();
                 productList.addAll(responseBody.Values);
                 productAdapter = new ProductAdapter(currentContext, productList, R.layout.listviewitem_admin_product_list_item);
@@ -116,7 +117,7 @@ public class ShopProductListFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<CategoryDto> call, Throwable throwable) {
+            public void onFailure(Call<PagingResponseDto<ProductDto>> call, Throwable throwable) {
                 Log.println(Log.ERROR, "API ERROR", "Error in fecth products");
                 return;
             }

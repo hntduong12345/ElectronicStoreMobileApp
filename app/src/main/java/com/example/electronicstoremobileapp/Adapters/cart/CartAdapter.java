@@ -12,7 +12,6 @@ import com.example.electronicstoremobileapp.R;
 import com.example.electronicstoremobileapp.databinding.ComponentCartItemRowBinding;
 import com.example.electronicstoremobileapp.databinding.ComponentProductViewBinding;
 import com.example.electronicstoremobileapp.models.Cart;
-import com.example.electronicstoremobileapp.models.products.ProductDto;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

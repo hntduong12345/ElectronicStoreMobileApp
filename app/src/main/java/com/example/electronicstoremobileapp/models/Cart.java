@@ -2,8 +2,6 @@ package com.example.electronicstoremobileapp.models;
 
 import android.app.Application;
 
-import com.example.electronicstoremobileapp.models.products.ProductDto;
-
 import java.util.List;
 
 public class Cart extends Application {

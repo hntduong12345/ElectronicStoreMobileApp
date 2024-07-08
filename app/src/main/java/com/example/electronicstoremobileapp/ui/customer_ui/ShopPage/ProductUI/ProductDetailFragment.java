@@ -19,7 +19,7 @@ import com.example.electronicstoremobileapp.databinding.FragmentProductDetailBin
 import com.example.electronicstoremobileapp.models.AccountDto;
 import com.example.electronicstoremobileapp.models.Cart;
 import com.example.electronicstoremobileapp.models.CartList;
-import com.example.electronicstoremobileapp.models.products.ProductDto;
+import com.example.electronicstoremobileapp.models.ProductDto;
 import com.example.electronicstoremobileapp.ui.customer_ui.Cart_Order.CartPageFragment;
 import com.google.gson.Gson;
 import com.squareup.picasso.Picasso;
