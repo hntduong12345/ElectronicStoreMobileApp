@@ -1,9 +1,10 @@
 package com.example.electronicstoremobileapp.apiClient.products;
 
+import com.example.electronicstoremobileapp.models.CategoryDto;
 import com.example.electronicstoremobileapp.models.PagingResponseDto;
 import com.example.electronicstoremobileapp.models.ProductDto;
 import com.example.electronicstoremobileapp.models.products.CategoryProductDto;
-import com.example.electronicstoremobileapp.models.products.ProductDto;
+
 
 import java.util.List;
 
@@ -56,8 +57,8 @@ public interface ProductServices {
     Call<Void> Delete(@Path("productId") String productId);
 
     @GET("api/Product/category")
-    Call<CategoryProductDto> GetProductbyCategory(@Query("categoryId") String categoryId, @Query("start") int start , @Query("pageSize") int pageSize);
+    Call<CategoryDto> GetProductbyCategory(@Query("categoryId") String categoryId, @Query("start") int start , @Query("pageSize") int pageSize);
 
     @GET("api/Product/range")
-    Call<CategoryProductDto> GetRange(@Query("start") int start , @Query("pageSize") int pageSize);
+    Call<CategoryDto> GetRange(@Query("start") int start , @Query("pageSize") int pageSize);
 }
