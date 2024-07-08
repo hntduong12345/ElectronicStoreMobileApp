@@ -78,6 +78,7 @@ public class CartAdapter extends BaseAdapter {
                 }
                 else{
                     getCartItem.ChangeQuantity(-1);
+                    binding.textViewQuantity.setText(String.valueOf(getCartItem.quantity));
                 }
             }
         });
@@ -90,7 +91,14 @@ public class CartAdapter extends BaseAdapter {
                 }
                 else{
                     getCartItem.ChangeQuantity(1);
+                    binding.textViewQuantity.setText(String.valueOf(getCartItem.quantity));
                 }
+            }
+        });
+
+        binding.imageViewRemoveItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
             }
         });
 
