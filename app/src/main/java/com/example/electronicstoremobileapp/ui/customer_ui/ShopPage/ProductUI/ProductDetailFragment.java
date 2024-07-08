@@ -78,10 +78,20 @@ public class ProductDetailFragment extends Fragment {
         BindToView();
 
         fetchCartData();
+
+        if(checkIsAddToCart()){
+            binding.buttonAddToCartPDP.setEnabled(false);
+            binding.buttonAddToCartPDP.setText("Added");
+        }
+        else{
+            binding.buttonAddToCartPDP.setEnabled(true);
+            binding.buttonAddToCartPDP.setText("Add to cart");
+        }
+
         return view;
     }
 
-    private void fetchCartData(){
+    private void fetchCartData() {
         cart = new ArrayList<>();
         cart.clear();
         Gson gson = new Gson();
@@ -90,6 +100,10 @@ public class ProductDetailFragment extends Fragment {
             CartList localCartList = gson.fromJson(dataJson, CartList.class);
             cart = localCartList.cartList;
         }
+    }
+
+    private boolean checkIsAddToCart() {
+        return cart.stream().map(cart1 -> cart1.cartItem).filter(p -> TextUtils.equals(p.ProductId, product.ProductId)).findAny().isPresent();
     }
 
     @Override
@@ -106,11 +120,14 @@ public class ProductDetailFragment extends Fragment {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("CartObject", jsonData);
                 editor.commit();
+
+                binding.buttonAddToCartPDP.setEnabled(false);
+                binding.buttonAddToCartPDP.setText("Added");
             }
         });
     }
 
-    private void BindToView(){
+    private void BindToView() {
         binding.textViewProductDetailName.setText(product.ProductName);
         binding.textViewProductDetailDescription.setText(product.Description);
         binding.textViewProductDetailPrice.setText(String.valueOf(product.DefaultPrice));
