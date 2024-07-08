@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/customer_home_navigation"
+    app:startDestination="@id/homePageFragment">
+
+    <fragment
+        android:id="@+id/homePageFragment"
+        android:name="com.example.electronicstoremobileapp.ui.customer_ui.HomePage.HomePageFragment"
+        android:label="fragment_home_page"
+        tools:layout="@layout/fragment_home_page" >
+        <action
+            android:id="@+id/action_homePageFragment_to_productDetailFragment"
+            app:destination="@id/productDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/productDetailFragment"
+        android:name="com.example.electronicstoremobileapp.ui.customer_ui.ShopPage.ProductUI.ProductDetailFragment"
+        android:label="fragment_product_detail"
+        tools:layout="@layout/fragment_product_detail" >
+        <action
+            android:id="@+id/action_productDetailFragment_to_customerHomeFragment"
+            app:destination="@id/customerHomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerHomeFragment"
+        android:name="com.example.electronicstoremobileapp.ui.customer_ui.HomePage.CustomerHomeFragment"
+        android:label="fragment_customer_home"
+        tools:layout="@layout/fragment_customer_home" >
+        <action
+            android:id="@+id/action_customerHomeFragment_to_homePageFragment"
+            app:destination="@id/homePageFragment" />
+    </fragment>
+</navigation>

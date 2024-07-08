@@ -55,4 +55,6 @@ dependencies {
     // https://mvnrepository.com/artifact/com.github.mvallim/java-fluent-validator
     implementation("com.github.mvallim:java-fluent-validator:1.9.1")
     implementation("org.apache.commons:commons-lang3:3.12.0")
+
+    implementation ("com.google.code.gson:gson:2.8.8")
 }
