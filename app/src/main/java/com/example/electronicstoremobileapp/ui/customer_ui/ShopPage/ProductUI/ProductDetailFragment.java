@@ -12,19 +12,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.electronicstoremobileapp.R;
-import com.example.electronicstoremobileapp.databinding.FragmentCartPageBinding;
 import com.example.electronicstoremobileapp.databinding.FragmentProductDetailBinding;
-import com.example.electronicstoremobileapp.models.AccountDto;
 import com.example.electronicstoremobileapp.models.Cart;
 import com.example.electronicstoremobileapp.models.CartList;
 import com.example.electronicstoremobileapp.models.ProductDto;
-import com.example.electronicstoremobileapp.ui.customer_ui.Cart_Order.CartPageFragment;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.squareup.picasso.Picasso;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,10 +38,12 @@ public class ProductDetailFragment extends Fragment {
 
     ProductDto product;
     Context currentContext;
-
-    SharedPreferences sharedPreferences;
-
     List<Cart> cart;
+
+    CartList localCartList;
+    SharedPreferences sharedPreferences;
+    Gson gson = new Gson();
+
 
     public ProductDetailFragment() {
         // Required empty public constructor
@@ -79,11 +79,10 @@ public class ProductDetailFragment extends Fragment {
 
         fetchCartData();
 
-        if(checkIsAddToCart()){
+        if (checkIsAddToCart()) {
             binding.buttonAddToCartPDP.setEnabled(false);
             binding.buttonAddToCartPDP.setText("Added");
-        }
-        else{
+        } else {
             binding.buttonAddToCartPDP.setEnabled(true);
             binding.buttonAddToCartPDP.setText("Add to cart");
         }
@@ -97,8 +96,8 @@ public class ProductDetailFragment extends Fragment {
         Gson gson = new Gson();
         String dataJson = sharedPreferences.getString("CartObject", "");
         if (!TextUtils.equals(dataJson, "[]") && !TextUtils.isEmpty(dataJson)) {
-            CartList localCartList = gson.fromJson(dataJson, CartList.class);
-            cart = localCartList.cartList;
+            Type listType = new TypeToken<List<Cart>>(){}.getType();
+            cart = gson.fromJson(dataJson, listType);
         }
     }
 
@@ -115,11 +114,12 @@ public class ProductDetailFragment extends Fragment {
                 cart.add(new Cart(product, 1));
 
                 Gson gson = new Gson();
-                String jsonData = gson.toJson(new CartList(cart));
+
+                String jsonData = gson.toJson(cart);
 
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("CartObject", jsonData);
-                editor.commit();
+                editor.apply();
 
                 binding.buttonAddToCartPDP.setEnabled(false);
                 binding.buttonAddToCartPDP.setText("Added");

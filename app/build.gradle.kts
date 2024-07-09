@@ -29,6 +29,10 @@ android {
     buildFeatures {
         viewBinding = true
     }
+
+    dataBinding{
+        enable = true;
+    }
 }
 
 dependencies {
@@ -57,4 +61,8 @@ dependencies {
     implementation("org.apache.commons:commons-lang3:3.12.0")
 
     implementation ("com.google.code.gson:gson:2.8.8")
+
+    implementation ("androidx.fragment:fragment-ktx:1.2.2")
+    implementation ("androidx.lifecycle:lifecycle-extensions:2.2.0")
+    implementation ("androidx.activity:activity-ktx:1.1.0")
 }
