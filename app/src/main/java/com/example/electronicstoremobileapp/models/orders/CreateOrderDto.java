@@ -6,11 +6,18 @@ import java.util.List;
 
 public class CreateOrderDto {
     @SerializedName("totalPrice")
-    public float TotalPrice;
+    public double TotalPrice;
     @SerializedName("accountId")
     public String AccountId;
     @SerializedName("orderDetails")
     public List<OrderDetailDto> OrderDetails;
     @SerializedName("truePrice")
-    public float TruePrice;
+    public double TruePrice;
+
+    public CreateOrderDto(double totalPrice, String accountId, List<OrderDetailDto> orderDetails, double truePrice) {
+        TotalPrice = totalPrice;
+        AccountId = accountId;
+        OrderDetails = orderDetails;
+        TruePrice = truePrice;
+    }
 }

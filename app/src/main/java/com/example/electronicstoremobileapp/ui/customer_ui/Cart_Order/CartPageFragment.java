@@ -1,7 +1,9 @@
 package com.example.electronicstoremobileapp.ui.customer_ui.Cart_Order;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -21,20 +23,31 @@ import android.widget.Toast;
 import com.example.electronicstoremobileapp.Adapters.cart.CartAdapter;
 import com.example.electronicstoremobileapp.R;
 import com.example.electronicstoremobileapp.apiClient.ApiClient;
+import com.example.electronicstoremobileapp.apiClient.orders.OrderServices;
+import com.example.electronicstoremobileapp.apiClient.products.ProductServices;
 import com.example.electronicstoremobileapp.apiClient.vouchers.VoucherServices;
 import com.example.electronicstoremobileapp.databinding.FragmentCartPageBinding;
-import com.example.electronicstoremobileapp.databinding.FragmentHomePageBinding;
 import com.example.electronicstoremobileapp.models.Cart;
+import com.example.electronicstoremobileapp.models.PagingResponseDto;
+import com.example.electronicstoremobileapp.models.ProductDto;
+import com.example.electronicstoremobileapp.models.orders.CreateOrderDto;
+import com.example.electronicstoremobileapp.models.orders.OrderDetailDto;
+import com.example.electronicstoremobileapp.models.orders.OrderDto;
+import com.example.electronicstoremobileapp.models.orders.PaymentRespones;
 import com.example.electronicstoremobileapp.models.CartList;
 import com.example.electronicstoremobileapp.models.VoucherDto;
 import com.example.electronicstoremobileapp.ui.customer_ui.HomePage.HomePageFragment;
 import com.google.gson.Gson;
-import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,12 +68,13 @@ public class CartPageFragment extends Fragment {
 
     SharedPreferences sharedPreferences;
     Gson gson = new Gson();
+    double totalPrice;
 
     VoucherDto selected = null;
+
     public CartPageFragment() {
         // Required empty public constructor
     }
-
 
     public static CartPageFragment newInstance() {
         CartPageFragment fragment = new CartPageFragment();
@@ -79,15 +93,16 @@ public class CartPageFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+            Bundle savedInstanceState) {
         binding = FragmentCartPageBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+
         currentContext = this.getContext();
         selected = null;
         Bundle args = getArguments();
-        if(args != null){
+        if (args != null) {
             String voucherSelectedId = args.getString("VoucherSelectedId");
-            if(voucherSelectedId != null){
+            if (voucherSelectedId != null) {
                 GetSelectedVoucher(voucherSelectedId);
             }
         }
@@ -100,9 +115,9 @@ public class CartPageFragment extends Fragment {
                 NavHostFragment host = (NavHostFragment) getParentFragment();
                 NavOptions option = new NavOptions.Builder()
                         .setEnterAnim(R.anim.enter_from_right)
-                                .setExitAnim(R.anim.exit_to_left)
-                                        .build();
-                host.getNavController().navigate(R.id.action_cartPageFragment_to_cartVoucherFragment,null,option);
+                        .setExitAnim(R.anim.exit_to_left)
+                        .build();
+                host.getNavController().navigate(R.id.action_cartPageFragment_to_cartVoucherFragment, null, option);
             }
         });
         return view;
@@ -119,9 +134,16 @@ public class CartPageFragment extends Fragment {
                 updateLocalData();
             }
         });
+
+        binding.buttonCheckOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SendRequest();
+            }
+        });
     }
 
-    public void UpdateList(List<Cart> items){
+    public void UpdateList(List<Cart> items) {
         cartList.clear();
         cartList.addAll(items);
         cartAdapter.notifyDataSetChanged();
@@ -130,23 +152,25 @@ public class CartPageFragment extends Fragment {
     }
 
     private void fetchData() {
-        try{
+        try {
             cartList.clear();
             String dataJson = sharedPreferences.getString("CartObject", "");
 
             if (!TextUtils.equals(dataJson, "[]") && !TextUtils.isEmpty(dataJson)) {
-                Type listType = new TypeToken<List<Cart>>(){}.getType();
+                Type listType = new TypeToken<List<Cart>>() {
+                }.getType();
                 cartList = gson.fromJson(dataJson, listType);
 
-                cartAdapter = new CartAdapter(currentContext, cartList, R.layout.component_cart_item_row, CartPageFragment.this);
+                cartAdapter = new CartAdapter(currentContext, cartList, R.layout.component_cart_item_row,
+                        CartPageFragment.this);
                 binding.listViewListCart.setAdapter(cartAdapter);
                 cartAdapter.notifyDataSetChanged();
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.getMessage();
         }
 
+        UpdateCartUI();
     }
 
     public void updateLocalData() {
@@ -155,8 +179,22 @@ public class CartPageFragment extends Fragment {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("CartObject", jsonData);
         editor.apply();
+
+        UpdateCartUI();
     }
-    void GetSelectedVoucher(String id){
+
+    private void UpdateCartUI() {
+        double total = 0;
+        for (Cart item : cartList) {
+            total += item.GetTotalCost();
+        }
+
+        totalPrice = total;
+
+        binding.textViewTotalCost.setText(String.valueOf(total + " đ"));
+    }
+
+    void GetSelectedVoucher(String id) {
         Call<VoucherDto> call = ApiClient.getServiceClient(VoucherServices.class).Get(id);
         call.enqueue(new Callback<VoucherDto>() {
             @Override
@@ -168,7 +206,8 @@ public class CartPageFragment extends Fragment {
                 }
                 VoucherDto responseBody = response.body();
                 selected = responseBody;
-                binding.textView9.setText("Voucher selected: "+selected.VoucherCode + " "+ selected.Percentage+"% OFF");
+                binding.textView9
+                        .setText("Voucher selected: " + selected.VoucherCode + " " + selected.Percentage + "% OFF");
             }
 
             @Override
@@ -177,8 +216,41 @@ public class CartPageFragment extends Fragment {
             }
         });
     }
+
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    public void SendRequest() {
+        List<OrderDetailDto> orderDetails = cartList.stream()
+                .map(c -> new OrderDetailDto(c.cartItem.ProductId, c.quantity, c.cartItem.DefaultPrice))
+                .collect(Collectors.toList());
+
+        cartList.clear();
+        updateLocalData();
+
+        // Change to AccId of Authen user
+        CreateOrderDto request = new CreateOrderDto(totalPrice, "6671a8961739bcd25b1b2e71", orderDetails, totalPrice);
+
+        Call<PaymentRespones> call = ApiClient.getServiceClient(OrderServices.class).CreateOrder(request);
+        call.enqueue(new Callback<PaymentRespones>() {
+            @Override
+            public void onResponse(Call<PaymentRespones> call, Response<PaymentRespones> response) {
+                int code = response.code();
+                if (code < 200 || code > 300 || response.body() == null) {
+                    Log.println(Log.ERROR, "API ERROR", "Error in fecth products with status code " + code);
+                    return;
+                }
+                PaymentRespones paymentRespones = response.body();
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(paymentRespones.PaymentUrl)));
+            }
+
+            @Override
+            public void onFailure(Call<PaymentRespones> call, Throwable throwable) {
+
+            }
+        });
+
     }
 }
