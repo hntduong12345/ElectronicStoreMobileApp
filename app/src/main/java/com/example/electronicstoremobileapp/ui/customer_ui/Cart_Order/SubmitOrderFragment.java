@@ -1,5 +1,7 @@
 package com.example.electronicstoremobileapp.ui.customer_ui.Cart_Order;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +10,8 @@ import androidx.navigation.NavController;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 
 import com.example.electronicstoremobileapp.R;
 import com.example.electronicstoremobileapp.databinding.FragmentPaymentResultBinding;
@@ -48,6 +52,13 @@ public class SubmitOrderFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentSubmitOrderBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+
+//        WebView webView = binding.WebViewVNP.findViewById(R.id.WebViewVNP);
+//        WebSettings webSettings = webView.getSettings();
+//        webSettings.setJavaScriptEnabled(true);
+//
+//        webView.loadUrl("https://lol.fandom.com/");
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://lol.fandom.com/")));
 
         return inflater.inflate(R.layout.fragment_submit_order, container, false);
     }
