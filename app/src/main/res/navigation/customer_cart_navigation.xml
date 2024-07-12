@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_cartPageFragment_to_submitOrderFragment"
             app:destination="@id/submitOrderFragment" />
+        <action
+            android:id="@+id/action_cartPageFragment_to_cartVoucherFragment"
+            app:destination="@id/cartVoucherFragment" />
     </fragment>
     <fragment
         android:id="@+id/submitOrderFragment"
@@ -49,4 +52,13 @@
         android:name="com.example.electronicstoremobileapp.ui.customer_ui.HomePage.HomePageFragment"
         android:label="fragment_home_page"
         tools:layout="@layout/fragment_home_page" />
+    <fragment
+        android:id="@+id/cartVoucherFragment"
+        android:name="com.example.electronicstoremobileapp.ui.customer_ui.Cart_Order.CartVoucherFragment"
+        android:label="fragment_customer_cart_voucher"
+        tools:layout="@layout/fragment_customer_cart_voucher">
+        <action
+            android:id="@+id/action_cartVoucherFragment_to_cartPageFragment"
+            app:destination="@id/cartPageFragment" />
+    </fragment>
 </navigation>

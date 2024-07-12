@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@+id/navigation_profile_detail"
+    android:id="@+id/admin_view_navigation">
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.example.electronicstoremobileapp.admins.ui.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_admin_profile">
+        <action
+            android:id="@+id/action_navigation_profile_to_profile_detail"
+            app:destination="@id/navigation_profile_detail"/>
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_profile_detail"
+        android:name="com.example.electronicstoremobileapp.admins.ui.profile.ProfileDetailFragment"
+        tools:layout="@layout/fragment_admin_profile_detail">
+        <action
+            android:id="@+id/action_navigation_profile_detail_to_revenue"
+            app:destination="@id/navigation_revenue"/>
+        <action
+            android:id="@+id/action_navigation_profile_detail_to_order_list"
+            app:destination="@id/navigation_order_list"/>
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_order_list"
+        android:name="com.example.electronicstoremobileapp.admins.ui.orders.OrderListFragment"
+        tools:layout="@layout/fragment_admin_order_list">
+        <action
+            android:id="@+id/action_navigation_order_list_to_profile_detail"
+            app:destination="@id/navigation_profile_detail"/>
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_revenue"
+        android:name="com.example.electronicstoremobileapp.admins.ui.revenue.RevenueFragment"
+        tools:layout="@layout/fragment_admin_revenue">
+        <action
+            android:id="@+id/action_navigation_revenue_to_profile_detail"
+            app:destination="@id/navigation_profile_detail"/>
+    </fragment>
+
+</navigation>

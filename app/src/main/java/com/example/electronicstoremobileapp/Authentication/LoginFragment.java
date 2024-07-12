@@ -16,13 +16,14 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.electronicstoremobileapp.MainActivity;
 import com.example.electronicstoremobileapp.R;
 import com.example.electronicstoremobileapp.Utility.UserLoggingUtil;
+import com.example.electronicstoremobileapp.admins.MainActivity;
 import com.example.electronicstoremobileapp.apiClient.ApiClient;
 import com.example.electronicstoremobileapp.apiClient.accounts.AuthService;
 import com.example.electronicstoremobileapp.Authentication.models.Login;
 import com.example.electronicstoremobileapp.Authentication.models.LoginResponse;
+import com.example.electronicstoremobileapp.ui.customer_ui.HomePage.HomeActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -91,11 +92,11 @@ public class LoginFragment extends Fragment {
                             String role = UserLoggingUtil.LogIn(getActivity(), token);
                             Intent intent;
                             if (role.equals("CUSTOMER")){
-                                intent = new Intent(getActivity(), MainActivity.class);
+                                intent = new Intent(getActivity(), HomeActivity.class);
                             }
                             else {
                                 // TODO: CHANGE LATER
-                                intent = new Intent(getActivity(), com.example.electronicstoremobileapp.admins.MainActivity.class);
+                                intent = new Intent(getActivity(), MainActivity.class);
                             }
                             startActivity(intent);
                         }

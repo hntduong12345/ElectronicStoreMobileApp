@@ -12,6 +12,7 @@ import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface OrderServices {
     String ORDERS = "api/orders";
@@ -28,5 +29,5 @@ public interface OrderServices {
     Call<PaymentRespones> CreateOrder(@Body CreateOrderDto createOrderDto);
 
     @PATCH(ORDERS + "/{id}/status")
-    Call<List<OrderDto>> ChangeOrderStatus(@Path("id") Object id, @Body String status);
+    Call<Void> ChangeOrderStatus(@Path("id") Object id, @Query("status") String status);
 }

@@ -38,6 +38,8 @@ public interface AccountServices {
     @POST("api/admin/create-staff")
     Call<Void> CreateStaff(@Body RegisterAccountModel model);
 
+    @GET("api/customer/get-profile-by-id/{id}")
+    Call<AccountDto> GetProfile(@Path("id") String id);
 
     @PUT("api/admin/change-status/{id}")
     Call<Void> Ban(@Path("id") String profileId);
