@@ -8,5 +8,11 @@ public class OrderDetailDto {
     @SerializedName("quantity")
     public int Quantity;
     @SerializedName("price")
-    public float Price;
+    public double Price;
+
+    public OrderDetailDto(String productId, int quantity, double price) {
+        ProductId = productId;
+        Quantity = quantity;
+        Price = price;
+    }
 }

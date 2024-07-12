@@ -2,6 +2,7 @@ package com.example.electronicstoremobileapp.apiClient.orders;
 
 import com.example.electronicstoremobileapp.models.orders.CreateOrderDto;
 import com.example.electronicstoremobileapp.models.orders.OrderDto;
+import com.example.electronicstoremobileapp.models.orders.PaymentRespones;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public interface OrderServices {
     Call<List<OrderDto>> GetOrderById(@Path("id") Object id);
 
     @POST(ORDERS)
-    Call<OrderDto> CreateOrder(@Body CreateOrderDto createOrderDto);
+    Call<PaymentRespones> CreateOrder(@Body CreateOrderDto createOrderDto);
 
     @PATCH(ORDERS + "/{id}/status")
     Call<List<OrderDto>> ChangeOrderStatus(@Path("id") Object id, @Body String status);
