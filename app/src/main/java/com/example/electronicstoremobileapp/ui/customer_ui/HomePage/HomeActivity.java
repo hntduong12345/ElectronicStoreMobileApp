@@ -24,6 +24,7 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.electronicstoremobileapp.AppConstant;
 import com.example.electronicstoremobileapp.R;
+import com.example.electronicstoremobileapp.Utility.JwtUtil;
 import com.example.electronicstoremobileapp.admins.MainActivity;
 import com.example.electronicstoremobileapp.databinding.ActivityHomeBinding;
 import com.example.electronicstoremobileapp.ui.customer_ui.Cart_Order.CartPageFragment;
@@ -44,6 +45,7 @@ public class HomeActivity extends AppCompatActivity {
 
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         BottomNavigationView navViewCustomer = (BottomNavigationView) findViewById(R.id.nav_view_customer);
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration

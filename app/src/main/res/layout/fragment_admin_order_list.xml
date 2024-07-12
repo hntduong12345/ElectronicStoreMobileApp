@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="admins.ui.vouchers.VoucherListFragment">
+    tools:context="admins.ui.orders.OrderListFragment">
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -13,16 +13,27 @@
             android:id="@+id/fragmentToolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/topbar_height"
-            android:title="Voucher"
+            android:title="Order"
             android:background="@color/teal_700"
             android:titleTextColor="@color/white"
-            app:title="Voucher"
+            app:title="Order"
             app:titleTextColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
+
         </androidx.appcompat.widget.Toolbar>
+        <Spinner
+            android:padding="10dp"
+            android:id="@+id/dropdownSorting"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/topbar_height"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </Spinner>
         <ListView
-            android:id="@+id/ListViewVoucher"
+            android:id="@+id/ListViewOrder"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"/>
