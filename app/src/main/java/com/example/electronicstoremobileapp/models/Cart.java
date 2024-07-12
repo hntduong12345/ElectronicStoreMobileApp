@@ -20,4 +20,8 @@ public class Cart {
     public void ChangeQuantity(int value){
         this.quantity += value;
     }
+
+    public double GetTotalCost(){
+        return quantity * cartItem.DefaultPrice;
+    }
 }
