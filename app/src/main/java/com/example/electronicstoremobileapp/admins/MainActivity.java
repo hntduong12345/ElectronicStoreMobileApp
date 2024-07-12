@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (allPermissionsGranted() == false) {
             //requestPermissions();
+            checkPermissions();
         }
     }
 
@@ -81,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkPermissions() {
+        boolean resultcheck1 = shouldShowRequestPermissionRationale(AppConstant.STORAGE_PERMISSIONs[0]);
+        boolean resultcheck2 = shouldShowRequestPermissionRationale(AppConstant.STORAGE_PERMISSIONs[1]);
+
         String[] getPermissionRequired = AppConstant.STORAGE_PERMISSIONs;
         List<String> permissionToAskFor = new ArrayList<String>();
         for (String permission : getPermissionRequired) {
@@ -89,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         if (permissionToAskFor.size() > 0) {
-            requestPermissions(permissionToAskFor.toArray(new String[permissionToAskFor.size()]), AppConstant.STORAGE_PERMISSIONs_CODE);
+            this.requestPermissions(permissionToAskFor.toArray(new String[permissionToAskFor.size()]), AppConstant.STORAGE_PERMISSIONs_CODE);
         }
     }
 
@@ -110,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void requestPermissions() {
-//        boolean shouldShowUiPermission = shouldShowRequestPermissionRationale(app)
+       // boolean shouldShowUiPermission = shouldShowRequestPermissionRationale(app)
         if (true) {
             new AlertDialog.Builder(this)
                     .setTitle("Permission Needed")
@@ -118,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            ActivityCompat.requestPermissions(MainActivity.this, AppConstant.STORAGE_PERMISSIONs, AppConstant.STORAGE_PERMISSIONs_CODE);
+                            openAppSettings();// ActivityCompat.requestPermissions(MainActivity.this, AppConstant.STORAGE_PERMISSIONs, AppConstant.STORAGE_PERMISSIONs_CODE);
                         }
                     })
                     .create()

@@ -24,7 +24,12 @@
         <action
             android:id="@+id/action_navigation_product_update_to_navigation_product"
             app:destination="@id/navigation_product" />
+        <action
+            android:id="@+id/action_navigation_product_update_to_navigation_product_detail"
+            app:destination="@id/navigation_product_detail" />
+
     </fragment>
+
     <fragment
         android:id="@+id/navigation_product_list"
         android:name="com.example.electronicstoremobileapp.admins.ui.products.ProductListFragment"
@@ -36,6 +41,9 @@
         <action
             android:id="@+id/action_navigation_product_list_to_navigation_product_update"
             app:destination="@id/navigation_product_update" />
+        <action
+            android:id="@+id/action_navigation_product_list_to_navigation_product_detail"
+            app:destination="@id/navigation_product_detail" />
     </fragment>
     <fragment
         android:id="@+id/navigation_product_create"
@@ -44,5 +52,34 @@
         <action
             android:id="@+id/action_navigation_product_create_to_navigation_product"
             app:destination="@id/navigation_product" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_product_detail"
+        android:name="com.example.electronicstoremobileapp.admins.ui.products.ProductDetailFragment"
+        android:label="@string/title_product"
+        tools:layout="@layout/fragment_admin_product_detail">
+
+        <action
+            android:id="@+id/action_navigation_product_detail_to_navigation_product_list"
+            app:destination="@id/navigation_product_list" />
+        <action
+            android:id="@+id/action_navigation_product_detail_to_navigation_product_update_storage"
+            app:destination="@id/navigation_product_update_storage" />
+        <action
+            android:id="@+id/action_navigation_product_detail_to_navigation_product_update"
+            app:destination="@id/navigation_product_update" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_product_update_storage"
+        android:name="com.example.electronicstoremobileapp.admins.ui.products.ProductUpdateStorageFragment"
+        android:label="@string/title_product"
+        tools:layout="@layout/fragment_admin_product_update_storage">
+
+        <action
+            android:id="@+id/action_navigation_product_update_storage_to_navigation_product_detail"
+            app:destination="@id/navigation_product_detail" />
+        <action
+            android:id="@+id/action_navigation_product_update_storage_to_navigation_product_list"
+            app:destination="@id/navigation_product_list" />
     </fragment>
 </navigation>

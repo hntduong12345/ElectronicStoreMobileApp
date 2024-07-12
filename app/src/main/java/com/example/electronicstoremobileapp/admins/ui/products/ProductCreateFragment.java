@@ -318,12 +318,12 @@ public class ProductCreateFragment extends Fragment {
             binding.edtManufacturer.setError("manufacturer must not empty");
             isValid = false;
         }
-        if (storageAmount < 0 || storageAmount > 100000) {
+        if (storageAmount < 0 || storageAmount > 1000000) {
             binding.edtStorageAmount.setError("storageAmount must be at least 0 and < 10000");
             isValid = false;
         }
-        if (defaultPrice < 0 || defaultPrice > 900000000.0) {
-            binding.edtDefaultPrice.setError("defaultPrice > 0 and less then 900 million");
+        if (defaultPrice < 10000 || defaultPrice > 100000000.0) {
+            binding.edtDefaultPrice.setError("defaultPrice > 0 and less then 100 million");
             isValid = false;
         }
         if (imageFile == null){
