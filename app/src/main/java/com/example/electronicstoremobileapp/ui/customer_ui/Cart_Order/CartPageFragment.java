@@ -46,7 +46,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 import kotlin.Triple;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -71,6 +73,7 @@ public class CartPageFragment extends Fragment {
 
     SharedPreferences sharedPreferences;
     Gson gson = new Gson();
+
     double truePrice;
 
     VoucherDto selected = null;
@@ -100,6 +103,7 @@ public class CartPageFragment extends Fragment {
         binding = FragmentCartPageBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         this.parentFragment = (NavHostFragment) getParentFragment();
+
         currentContext = this.getContext();
         selected = null;
         Bundle args = getArguments();
@@ -191,8 +195,9 @@ public class CartPageFragment extends Fragment {
         for (Cart item : cartList) {
             total += item.GetTotalCost();
         }
-
+      
         truePrice = total;
+
 
         binding.textViewTotalCost.setText(String.valueOf(total + " đ"));
     }
@@ -234,11 +239,13 @@ public class CartPageFragment extends Fragment {
         updateLocalData();
 
         // Change to AccId of Authen user
+
         Triple<String, String, String> userInfo = UserLoggingUtil.GetUserInfo(getContext());
 
         double totalPrice = truePrice*(1-((selected.Percentage)/100));
 
         CreateOrderDto request = new CreateOrderDto(totalPrice, userInfo.component1(), orderDetails, truePrice);
+
 
         Call<PaymentRespones> call = ApiClient.getServiceClient(OrderServices.class).CreateOrder(request);
         call.enqueue(new Callback<PaymentRespones>() {
