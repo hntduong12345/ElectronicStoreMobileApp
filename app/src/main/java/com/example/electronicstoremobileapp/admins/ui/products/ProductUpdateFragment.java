@@ -76,7 +76,6 @@ public class ProductUpdateFragment extends Fragment {
         updateProductDto = new UpdateProductDto();
         categoryDtoList = new ArrayList<>();
         LocalDateTime now = Helpers.getLocalDateTime();
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -122,6 +121,7 @@ public class ProductUpdateFragment extends Fragment {
                 toolbarNavClick(v);
             }
         });
+
         binding.btnUpdateProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -166,7 +166,8 @@ public class ProductUpdateFragment extends Fragment {
         NavHostFragment parentFragment = (NavHostFragment) getParentFragment();
         if (parentFragment != null) {
             NavController navController = parentFragment.getNavController();
-            navController.navigate(R.id.action_navigation_product_update_to_navigation_product);
+            //navController.navigate(R.id.action_navigation_product_update_to_navigation_product);
+            navController.navigateUp();
         }
     }
     private void addNewErrorToErrorList(String field, String message){
@@ -191,7 +192,7 @@ public class ProductUpdateFragment extends Fragment {
     }
     private void bindToUpdateModel() {
         updateProductDto.CategoryId = ((CategoryDto) dropdownCategory.getSelectedItem()).CategoryId;
-        updateProductDto.StorageAmount = Integer.valueOf(binding.edtStorageAmount.getText().toString());
+        updateProductDto.StorageAmount = selectedProduct.StorageAmount;//Integer.valueOf(binding.edtStorageAmount.getText().toString());
         updateProductDto.DefaultPrice = Double.valueOf(binding.edtDefaultPrice.getText().toString());
         updateProductDto.ProductName = String.valueOf(binding.edtProductName.getText().toString());
         //this is for image only
@@ -258,7 +259,7 @@ public class ProductUpdateFragment extends Fragment {
         binding.edtDescription.setText( Helpers.returnEmptyStringOrValue(selectedProduct.Description) );
         binding.edtDefaultPrice.setText( Helpers.returnEmptyStringOrValue(String.valueOf(selectedProduct.DefaultPrice)) );
         binding.edtManufacturer.setText( Helpers.returnEmptyStringOrValue(selectedProduct.Manufacturer) );
-        binding.edtStorageAmount.setText( Helpers.returnEmptyStringOrValue(String.valueOf(selectedProduct.StorageAmount)) );
+        //binding.edtStorageAmount.setText( Helpers.returnEmptyStringOrValue(String.valueOf(selectedProduct.StorageAmount)) );
         CategoryDto getSelectedCategory = categoryDtoList
                 .stream()
                 .filter(categoryDto ->  StringUtils.equals(categoryDto.CategoryId, selectedProduct.CategoryId) )
@@ -305,12 +306,12 @@ public class ProductUpdateFragment extends Fragment {
             binding.edtManufacturer.setError("manufacturer must not empty");
             isValid = false;
         }
-        if (storageAmount < 0 || storageAmount > 100000) {
-            binding.edtStorageAmount.setError("storageAmount must be at least 0 and < 10000");
-            isValid = false;
-        }
-        if (defaultPrice < 0 || defaultPrice > 900000000.0) {
-            binding.edtDefaultPrice.setError("defaultPrice > 0 and less then 900 million");
+//        if (storageAmount < 0 || storageAmount > 1000000) {
+//            binding.edtStorageAmount.setError("storageAmount must be at least 0 and < 10000");
+//            isValid = false;
+//        }
+        if (defaultPrice < 10000 || defaultPrice > 100000000.0) {
+            binding.edtDefaultPrice.setError("defaultPrice > 0 and less then 100 million");
             isValid = false;
         }
 //        if (imageFile == null){
@@ -354,7 +355,9 @@ public class ProductUpdateFragment extends Fragment {
                 if (response.isSuccessful()) {
                     Log.w("UPDATE SUCCESS", "UPDATE success");
 //                    binding.btnBack.callOnClick();
-                    toolbarNavClick(new View(getContext()));
+                    NavHostFragment parentFragment = (NavHostFragment) getParentFragment();
+                    parentFragment.getNavController().navigate(R.id.action_navigation_product_update_to_navigation_product);
+                    //toolbarNavClick(new View(getContext()));
                 } else {
                     try {
                         Gson gson = new GsonBuilder().create();

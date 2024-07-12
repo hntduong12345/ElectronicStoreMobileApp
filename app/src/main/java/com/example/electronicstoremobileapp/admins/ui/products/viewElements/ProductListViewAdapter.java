@@ -88,6 +88,14 @@ public class ProductListViewAdapter extends BaseAdapter {
                 .error(R.drawable.ic_launcher_foreground)
                 .fit()
                 .into(binding.imgProductImage);
+        binding.btnDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putParcelable(TOBE_UPDATE_OBJECT_KEY,getProduct);
+                parentNavigationFragment.getNavController().navigate(R.id.action_navigation_product_list_to_navigation_product_detail,bundle);
+            }
+        });
         binding.btnUpdateProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -127,6 +135,8 @@ public class ProductListViewAdapter extends BaseAdapter {
                 dialog.show();
             }
         });
+        binding.btnUpdateProduct.setEnabled(false);
+        binding.btnUpdateProduct.setImageDrawable(null);
         return convertView;
     }
     private void dialogDeleteClick(View view,ProductDto productDto) {

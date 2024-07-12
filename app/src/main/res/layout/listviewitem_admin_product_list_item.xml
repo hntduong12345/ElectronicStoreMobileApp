@@ -58,7 +58,13 @@
             android:orientation="vertical"
             android:gravity="center_vertical"
             android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/btnDetail"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_info_24">
 
+            </ImageView>
             <ImageView
                 android:id="@+id/btnUpdateProduct"
                 android:layout_width="30dp"

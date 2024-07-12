@@ -15,5 +15,5 @@ public class AppConstant {
             Manifest.permission.WRITE_EXTERNAL_STORAGE
     };
     public static final int STORAGE_PERMISSIONs_CODE = 1212;
-
+    public static final int MAX_STORAGE_CAPACITY = 100000;
 }

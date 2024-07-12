@@ -51,6 +51,9 @@ public interface ProductServices {
                             @Part("StorageAmount") RequestBody storageAmount,
                             @Part MultipartBody.Part imageFile
     );
+    @Multipart
+    @PUT("api/Product/Storage/{productId}")
+    Call<Void> UpdateStorage(@Path("productId") String productId, @Part("StorageAmount") RequestBody storageAmount);
     @DELETE("api/Product/{productId}")
     Call<Void> Delete(@Path("productId") String productId);
 
@@ -59,4 +62,5 @@ public interface ProductServices {
 
     @GET("api/Product/range")
     Call<PagingResponseDto<ProductDto>> GetRange(@Query("start") int start , @Query("pageSize") int pageSize);
+
 }
