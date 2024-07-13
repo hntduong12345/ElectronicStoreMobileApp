@@ -146,9 +146,11 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="70dp"
+            android:backgroundTint="@color/primary_500"
             android:text="Add To Cart"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:rippleColor="@color/primary_300" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
