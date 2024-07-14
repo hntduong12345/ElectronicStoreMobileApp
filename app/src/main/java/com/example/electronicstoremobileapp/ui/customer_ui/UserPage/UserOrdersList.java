@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,6 +52,21 @@ public class UserOrdersList extends Fragment {
         View view = binding.getRoot();
 
         return inflater.inflate(R.layout.fragment_user_orders_list, container, false);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        binding.imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment parentFragment = (NavHostFragment) getParentFragment();
+                if (parentFragment != null) {
+                    NavController navController = parentFragment.getNavController();
+                    navController.navigate(R.id.action_userOrdersList_to_userPageFragment);
+                }
+            }
+        });
     }
 
     @Override
