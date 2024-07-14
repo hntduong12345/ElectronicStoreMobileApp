@@ -2,6 +2,7 @@ package com.example.electronicstoremobileapp.admins.ui.products;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -48,8 +49,13 @@ import com.squareup.picasso.Picasso;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -200,30 +206,57 @@ public class ProductUpdateFragment extends Fragment {
         //this is for image only
         String imageUri = (String) binding.imgSelectedImage.getTag(R.string.IMAGE_VIEW_TAG_URI);
         if (imageUri != null) {
-            String pathToImage = getImagePathFromUri(Uri.parse(imageUri));
-            if (pathToImage != null) {
-                updateProductDto.ImageFile = getFileFromPath(pathToImage);
-            } else {
-                updateProductDto.ImageFile = null;
-            }
+//            String pathToImage = getImagePathFromUri(Uri.parse(imageUri));
+//            if (pathToImage != null) {
+//                updateProductDto.ImageFile = getFileFromPath(pathToImage);
+//            } else {
+//                updateProductDto.ImageFile = null;
+//            }
+            updateProductDto.ImageFile = uriToFile(Uri.parse(imageUri));
+            //File tryVal = getFileFromPath(getImagePathFromUri(Uri.parse(imageUri)));
         }
         updateProductDto.Description = String.valueOf(binding.edtDescription.getText().toString());
         updateProductDto.Manufacturer = String.valueOf(binding.edtManufacturer.getText().toString());
     }
 
-    private String getImagePathFromUri(Uri imageUri) {
+    private String getImagePathFromUri(Uri imageUri){
         String[] projection = {MediaStore.Images.Media.DATA};
-        Cursor cursor = this.getActivity().getContentResolver().query(imageUri, projection, null, null, null);
+        Cursor cursor = this.getActivity().getApplicationContext().getContentResolver().query(imageUri, projection, null, null, null);
         if (cursor != null) {
+            ContentResolver resolver = this.getActivity().getApplicationContext().getContentResolver();
             int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
             cursor.moveToFirst();
             String path = cursor.getString(column_index);
+            //String path = imageUri.getPath();
             cursor.close();
             return path;
         }
         return null;
     }
+    public File uriToFile(Uri uri) {
+        File file = null;
+        try {
+            ContentResolver contentResolver = this.getActivity().getApplicationContext().getContentResolver();
+            //String.valueOf( LocalDateTime.now().toEpochSecond(ZoneOffset.ofHours(7)) ) +
+            String fileName = "BaseImage"+  ".jpg";
+            File cacheDir = this.getActivity().getExternalCacheDir();
+            file = new File(cacheDir, fileName);
+            InputStream inputStream = contentResolver.openInputStream(uri);
+            OutputStream outputStream = new FileOutputStream(file);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = inputStream.read(buffer)) > 0) {
+                outputStream.write(buffer, 0, length);
+            }
+            outputStream.close();
+            inputStream.close();
+        } catch (Exception e) {
+            Log.e("Error", "Error while converting URI to File: " + e.getMessage());
+        }finally {
 
+        }
+        return file;
+    }
     private File getFileFromPath(String filePath) {
         File file = new File(filePath);
         return file;
