@@ -46,6 +46,7 @@ public class HomeActivity extends AppCompatActivity {
         binding = ActivityHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        getWindow().setStatusBarColor(getColor(R.color.primary_500));
         BottomNavigationView navViewCustomer = (BottomNavigationView) findViewById(R.id.nav_view_customer);
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration
