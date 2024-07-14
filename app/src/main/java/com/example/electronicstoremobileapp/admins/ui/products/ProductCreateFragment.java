@@ -2,6 +2,7 @@ package com.example.electronicstoremobileapp.admins.ui.products;
 
 import static android.app.Activity.RESULT_OK;
 
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -47,7 +48,10 @@ import com.google.gson.JsonParser;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -257,12 +261,13 @@ public class ProductCreateFragment extends Fragment {
         //this is for image only
         String imageUri = (String) binding.imgSelectedImage.getTag(R.string.IMAGE_VIEW_TAG_URI);
         if (imageUri != null) {
-            String pathToImage = getImagePathFromUri(Uri.parse(imageUri));
-            if (pathToImage != null) {
-                newProductModel.ImageFile = getFileFromPath(pathToImage);
-            } else {
-                newProductModel.ImageFile = null;
-            }
+//            String pathToImage = getImagePathFromUri(Uri.parse(imageUri));
+//            if (pathToImage != null) {
+//                newProductModel.ImageFile = getFileFromPath(pathToImage);
+//            } else {
+//                newProductModel.ImageFile = null;
+//            }
+            newProductModel.ImageFile = uriToFile(Uri.parse(imageUri));
         }
 
         //this is for image only
@@ -270,7 +275,30 @@ public class ProductCreateFragment extends Fragment {
         newProductModel.Description = String.valueOf(binding.edtDescription.getText().toString());
         newProductModel.Manufacturer = String.valueOf(binding.edtManufacturer.getText().toString());
     }
+    public File uriToFile(Uri uri) {
+        File file = null;
+        try {
+            ContentResolver contentResolver = this.getActivity().getApplicationContext().getContentResolver();
+            //String.valueOf( LocalDateTime.now().toEpochSecond(ZoneOffset.ofHours(7)) ) +
+            String fileName = "BaseImage"+  ".jpg";
+            File cacheDir = this.getActivity().getExternalCacheDir();
+            file = new File(cacheDir, fileName);
+            InputStream inputStream = contentResolver.openInputStream(uri);
+            OutputStream outputStream = new FileOutputStream(file);
+            byte[] buffer = new byte[1024];
+            int length;
+            while ((length = inputStream.read(buffer)) > 0) {
+                outputStream.write(buffer, 0, length);
+            }
+            outputStream.close();
+            inputStream.close();
+        } catch (Exception e) {
+            Log.e("Error", "Error while converting URI to File: " + e.getMessage());
+        }finally {
 
+        }
+        return file;
+    }
     private String getImagePathFromUri(Uri imageUri) {
         String[] projection = {MediaStore.Images.Media.DATA};
 //        CursorLoader loader =
