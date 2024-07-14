@@ -3,6 +3,7 @@ package com.example.electronicstoremobileapp.admins.ui.products;
 import static android.app.Activity.RESULT_OK;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.net.Uri;
@@ -21,7 +22,9 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -29,6 +32,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.electronicstoremobileapp.AppConstant;
 import com.example.electronicstoremobileapp.R;
+import com.example.electronicstoremobileapp.admins.MainActivity;
 import com.example.electronicstoremobileapp.admins.ui.products.models.CreateProductDto;
 import com.example.electronicstoremobileapp.apiClient.ApiClient;
 import com.example.electronicstoremobileapp.apiClient.categories.CategoryServices;
@@ -137,6 +141,7 @@ public class ProductCreateFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 binding.scollviewErrorLayout.removeAllViews();
+                checkPermissions();
                 onCreateClick();
 //                bindToNewModel();
 //                Validator<CreateProductDto> validator = new CreateProductDto.CreateProductDtoValidator();
@@ -240,9 +245,9 @@ public class ProductCreateFragment extends Fragment {
         i.setAction(Intent.ACTION_GET_CONTENT);
         // pass the constant to compare it
         // with the returned requestCode
-        //startActivityForResult(Intent.createChooser(i, "Select Picture"), AppConstant.SELECT_PICTURE_CODE);
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, AppConstant.SELECT_PICTURE_CODE);
+        startActivityForResult(Intent.createChooser(i, "Select Picture"), AppConstant.SELECT_PICTURE_CODE);
+        //Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        //startActivityForResult(intent, AppConstant.SELECT_PICTURE_CODE);
     }
     private void bindToNewModel() {
         newProductModel.CategoryId = ((CategoryDto) dropdownCategory.getSelectedItem()).CategoryId;
@@ -383,5 +388,46 @@ public class ProductCreateFragment extends Fragment {
             }
         });
 
+    }
+    private void checkPermissions() {
+        boolean resultcheck1 = shouldShowRequestPermissionRationale(AppConstant.STORAGE_PERMISSIONs[0]);
+        boolean resultcheck2 = shouldShowRequestPermissionRationale(AppConstant.STORAGE_PERMISSIONs[1]);
+
+        String[] getPermissionRequired = AppConstant.STORAGE_PERMISSIONs;
+        List<String> permissionToAskFor = new ArrayList<String>();
+        for (String permission : getPermissionRequired) {
+            if (ContextCompat.checkSelfPermission(getActivity().getApplicationContext(), permission) != PackageManager.PERMISSION_GRANTED) {
+                permissionToAskFor.add(permission);
+                permissionToAskFor.add(AppConstant.STORAGE_PERMISSIONs[2]);
+            }
+        }
+        if (permissionToAskFor.size() > 0) {
+            this.requestPermissions(permissionToAskFor.toArray(new String[permissionToAskFor.size()]), AppConstant.STORAGE_PERMISSIONs_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == AppConstant.STORAGE_PERMISSIONs_CODE) {
+            if (permissions.length == grantResults.length) {
+                boolean isAllGranted = true;
+                for (int grantedOrNot : grantResults) {
+                    if (grantedOrNot == PackageManager.PERMISSION_GRANTED) {
+                        continue;
+                    }
+                    isAllGranted = false;
+                }
+                if (isAllGranted == false) {
+                    //openAppSettings();
+                    //finish();
+                    Toast.makeText(getContext(), "PERMISSION IS NOT GRANTED FOR STORAGE", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                Toast.makeText(getContext(), "ALL PERMISSION IS GRANTED FOR STORAGE", Toast.LENGTH_LONG).show();
+            } else {
+
+            }
+        }
     }
 }

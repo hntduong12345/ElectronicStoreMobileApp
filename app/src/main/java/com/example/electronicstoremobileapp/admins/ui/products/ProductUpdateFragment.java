@@ -187,8 +187,10 @@ public class ProductUpdateFragment extends Fragment {
         Intent i = new Intent();
         i.setType("image/*");
         i.setAction(Intent.ACTION_GET_CONTENT);
-        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent, AppConstant.SELECT_PICTURE_CODE);
+        startActivityForResult(Intent.createChooser(i, "Select Picture"), AppConstant.SELECT_PICTURE_CODE);
+
+        //Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        //startActivityForResult(intent, AppConstant.SELECT_PICTURE_CODE);
     }
     private void bindToUpdateModel() {
         updateProductDto.CategoryId = ((CategoryDto) dropdownCategory.getSelectedItem()).CategoryId;
