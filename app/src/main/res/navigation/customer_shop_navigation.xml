@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_shopProductListFragment_to_customerShopFragment"
             app:destination="@id/customerShopFragment" />
+        <action
+            android:id="@+id/action_shopProductListFragment_to_shopPageFragment"
+            app:destination="@id/shopPageFragment" />
     </fragment>
     <fragment
         android:id="@+id/productDetailFragment2"
@@ -34,6 +37,9 @@
         <action
             android:id="@+id/action_productDetailFragment2_to_customerShopFragment"
             app:destination="@id/customerShopFragment" />
+        <action
+            android:id="@+id/action_productDetailFragment2_to_shopProductListFragment"
+            app:destination="@id/shopProductListFragment" />
     </fragment>
     <fragment
         android:id="@+id/customerShopFragment"

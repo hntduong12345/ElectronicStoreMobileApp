@@ -115,6 +115,7 @@ public class CartPageFragment extends Fragment {
         }
         cartList = new ArrayList<>();
         sharedPreferences = getActivity().getSharedPreferences("CartData", Context.MODE_PRIVATE);
+
         fetchData();
         binding.constraintLayoutVoucher.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,13 +172,14 @@ public class CartPageFragment extends Fragment {
                 cartAdapter = new CartAdapter(currentContext, cartList, R.layout.component_cart_item_row,
                         CartPageFragment.this);
                 binding.listViewListCart.setAdapter(cartAdapter);
+                UpdateCartUI();
                 cartAdapter.notifyDataSetChanged();
             }
         } catch (Exception e) {
             e.getMessage();
         }
 
-        UpdateCartUI();
+
     }
 
     public void updateLocalData() {
@@ -235,14 +237,21 @@ public class CartPageFragment extends Fragment {
                 .map(c -> new OrderDetailDto(c.cartItem.ProductId, c.quantity, c.cartItem.DefaultPrice))
                 .collect(Collectors.toList());
 
-        cartList.clear();
-        updateLocalData();
+
 
         // Change to AccId of Authen user
 
         Triple<String, String, String> userInfo = UserLoggingUtil.GetUserInfo(getContext());
 
-        double totalPrice = truePrice*(1-((selected.Percentage)/100));
+        double totalPrice = 0;
+
+        if(selected != null){
+
+            totalPrice = truePrice*(1-((selected.Percentage)/100));
+        }
+        else{
+            totalPrice = truePrice;
+        }
 
         CreateOrderDto request = new CreateOrderDto(totalPrice, userInfo.component1(), orderDetails, truePrice);
 
@@ -257,6 +266,8 @@ public class CartPageFragment extends Fragment {
                     return;
                 }
                 PaymentRespones paymentRespones = response.body();
+                cartList.clear();
+                updateLocalData();
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(paymentRespones.PaymentUrl)));
             }
 
@@ -265,6 +276,5 @@ public class CartPageFragment extends Fragment {
 
             }
         });
-
     }
 }

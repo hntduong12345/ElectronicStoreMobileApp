@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -123,6 +124,17 @@ public class ProductDetailFragment extends Fragment {
 
                 binding.buttonAddToCartPDP.setEnabled(false);
                 binding.buttonAddToCartPDP.setText("Added");
+            }
+        });
+
+        binding.imageViewBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment parentFragment = (NavHostFragment) getParentFragment();
+                if (parentFragment != null) {
+                    NavController navController = parentFragment.getNavController();
+                    navController.navigate(R.id.action_productDetailFragment2_to_shopProductListFragment);
+                }
             }
         });
     }
