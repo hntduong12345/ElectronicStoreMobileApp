@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/account_navigation"
+    app:startDestination="@id/navigation_account_list">
+    <fragment
+        android:id="@+id/navigation_account"
+        android:name="com.example.electronicstoremobileapp.admins.ui.accounts.AccountFragment"
+        tools:layout="@layout/fragment_admin_account">
+
+        <action
+            android:id="@+id/action_navigation_account_to_navigation_account_list"
+            app:destination="@id/navigation_account_list" />
+        <action
+            android:id="@+id/action_navigation_account_to_navigation_account_create"
+            app:destination="@id/navigation_account_create" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_account_list"
+        android:name="com.example.electronicstoremobileapp.admins.ui.accounts.AccountFragmentList"
+        tools:layout="@layout/fragment_admin_account_list">
+
+        <action
+            android:id="@+id/action_navigation_account_list_to_navigation_account_create"
+            app:destination="@id/navigation_account_create" />
+        <action
+            android:id="@+id/action_navigation_account_list_to_navigation_account_detail"
+            app:destination="@id/navigation_account_detail" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_account_create"
+        android:name="com.example.electronicstoremobileapp.admins.ui.accounts.AccountFragmentCreate"
+        tools:layout="@layout/fragment_admin_account_create">
+        <action
+            android:id="@+id/action_navigation_account_create_to_navigation_account"
+            app:destination="@id/navigation_account" />
+    </fragment>
+    <fragment
+        android:id="@+id/navigation_account_detail"
+        android:name="com.example.electronicstoremobileapp.admins.ui.accounts.AccountFragmentDetails"
+        tools:layout="@layout/fragment_admin_account_details">
+        <!--        <argument-->
+        <!--            android:name="AccountDetail"-->
+        <!--            app:argType="com.example.electricstoretestapi.ui.account.models.AccountDto">-->
+        <!--            -->
+        <!--        </argument>-->
+        <action
+            android:id="@+id/action_navigation_account_detail_to_navigation_account"
+            app:destination="@id/navigation_account" />
+    </fragment>
+</navigation>

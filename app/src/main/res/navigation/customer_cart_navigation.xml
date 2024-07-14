@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/customer_cart_navigation"
+    app:startDestination="@id/cartPageFragment">
+
+    <fragment
+        android:id="@+id/cartPageFragment"
+        android:name="com.example.electronicstoremobileapp.ui.customer_ui.Cart_Order.CartPageFragment"
+        android:label="fragment_cart_page"
+        tools:layout="@layout/fragment_cart_page" >
+        <action
+            android:id="@+id/action_cartPageFragment_to_submitOrderFragment"
+            app:destination="@id/submitOrderFragment" />
+        <action
+            android:id="@+id/action_cartPageFragment_to_cartVoucherFragment"
+            app:destination="@id/cartVoucherFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/submitOrderFragment"
+        android:name="com.example.electronicstoremobileapp.ui.customer_ui.Cart_Order.SubmitOrderFragment"
+        android:label="fragment_submit_order"
+        tools:layout="@layout/fragment_submit_order" >
+        <action
+            android:id="@+id/action_submitOrderFragment_to_paymentResultFragment"
+            app:destination="@id/paymentResultFragment" />
+        <action
+            android:id="@+id/action_submitOrderFragment_to_customerCartFragment"
+            app:destination="@id/customerCartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentResultFragment"
+        android:name="com.example.electronicstoremobileapp.ui.customer_ui.Cart_Order.PaymentResultFragment"
+        android:label="fragment_payment_result"
+        tools:layout="@layout/fragment_payment_result" >
+        <action
+            android:id="@+id/action_paymentResultFragment_to_homePageFragment2"
+            app:destination="@id/homePageFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerCartFragment"
+        android:name="com.example.electronicstoremobileapp.ui.customer_ui.Cart_Order.CustomerCartFragment"
+        android:label="fragment_customer_cart"
+        tools:layout="@layout/fragment_customer_cart" >
+        <action
+            android:id="@+id/action_customerCartFragment_to_cartPageFragment"
+            app:destination="@id/cartPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/homePageFragment2"
+        android:name="com.example.electronicstoremobileapp.ui.customer_ui.HomePage.HomePageFragment"
+        android:label="fragment_home_page"
+        tools:layout="@layout/fragment_home_page" />
+    <fragment
+        android:id="@+id/cartVoucherFragment"
+        android:name="com.example.electronicstoremobileapp.ui.customer_ui.Cart_Order.CartVoucherFragment"
+        android:label="fragment_customer_cart_voucher"
+        tools:layout="@layout/fragment_customer_cart_voucher">
+        <action
+            android:id="@+id/action_cartVoucherFragment_to_cartPageFragment"
+            app:destination="@id/cartPageFragment" />
+    </fragment>
+</navigation>

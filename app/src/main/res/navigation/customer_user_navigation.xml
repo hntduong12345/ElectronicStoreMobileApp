@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/customer_user_navigation"
+    app:startDestination="@id/userPageFragment">
+
+    <fragment
+        android:id="@+id/userPageFragment"
+        android:name="com.example.electronicstoremobileapp.ui.customer_ui.UserPage.UserPageFragment"
+        android:label="fragment_user_page"
+        tools:layout="@layout/fragment_user_page" >
+        <action
+            android:id="@+id/action_userPageFragment_to_userOrdersList"
+            app:destination="@id/userOrdersList" />
+        <action
+            android:id="@+id/action_userPageFragment_to_settingsPageFragment"
+            app:destination="@id/settingsPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userOrdersList"
+        android:name="com.example.electronicstoremobileapp.ui.customer_ui.UserPage.UserOrdersList"
+        android:label="fragment_user_orders_list"
+        tools:layout="@layout/fragment_user_orders_list" >
+        <action
+            android:id="@+id/action_userOrdersList_to_orderDetailFragment"
+            app:destination="@id/orderDetailFragment" />
+        <action
+            android:id="@+id/action_userOrdersList_to_userPageFragment"
+            app:destination="@id/userPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderDetailFragment"
+        android:name="com.example.electronicstoremobileapp.ui.customer_ui.UserPage.OrderDetailFragment"
+        android:label="fragment_order_detail"
+        tools:layout="@layout/fragment_order_detail" >
+        <action
+            android:id="@+id/action_orderDetailFragment_to_customerUserFragment"
+            app:destination="@id/customerUserFragment" />
+        <action
+            android:id="@+id/action_orderDetailFragment_to_userOrdersList"
+            app:destination="@id/userOrdersList" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsPageFragment"
+        android:name="com.example.electronicstoremobileapp.ui.customer_ui.UserPage.SettingsPageFragment"
+        android:label="fragment_settings_page"
+        tools:layout="@layout/fragment_settings_page" >
+        <action
+            android:id="@+id/action_settingsPageFragment_to_customerUserFragment"
+            app:destination="@id/customerUserFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerUserFragment"
+        android:name="com.example.electronicstoremobileapp.ui.customer_ui.UserPage.CustomerUserFragment"
+        android:label="fragment_customer_user"
+        tools:layout="@layout/fragment_customer_user" >
+        <action
+            android:id="@+id/action_customerUserFragment_to_userPageFragment"
+            app:destination="@id/userPageFragment" />
+        <action
+            android:id="@+id/action_customerUserFragment_to_userOrdersList"
+            app:destination="@id/userOrdersList" />
+    </fragment>
+</navigation>

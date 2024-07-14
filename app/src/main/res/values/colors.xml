@@ -2,4 +2,60 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="gray">#D6D6D6</color>
+    <color name="neon_purple">#B026FF</color>
+    <color name="teal_700">#FF018786</color>
+
+    <!-- Primary Color -->
+    <color name="primary_100">#D9F1FD</color>
+    <color name="primary_200">#A9DCF7</color>
+    <color name="primary_300">#7ECEF8</color>
+    <color name="primary_400">#53BDF5</color>
+    <color name="primary_500">#1AA6F1</color>
+    <color name="primary_600">#0083C9</color>
+    <color name="primary_700">#006296</color>
+    <color name="primary_800">#013958</color>
+    <color name="primary_900">#012436</color>
+    <color name="primary_1000">#001926</color>
+
+    <!-- Secondary Color -->
+    <color name="secondary_100">#E7EBEF</color>
+    <color name="secondary_200">#DAE1E7</color>
+    <color name="secondary_300">#CED7DE</color>
+    <color name="secondary_400">#C2CDD6</color>
+    <color name="secondary_500">#B6C3CD</color>
+    <color name="secondary_600">#92A5B5</color>
+    <color name="secondary_700">#7991A4</color>
+    <color name="secondary_800">#637D92</color>
+    <color name="secondary_900">#4A5E6D</color>
+    <color name="secondary_1000">#323F49</color>
+
+    <!-- Neutral Color -->
+    <color name="neutral_basic_white">#FCFCFC</color>
+    <color name="neutral_100">#E8EBED</color>
+    <color name="neutral_200">#D2D6DB</color>
+    <color name="neutral_300">#BBC2C9</color>
+    <color name="neutral_400">#A4ADB6</color>
+    <color name="neutral_500">#828F9B</color>
+    <color name="neutral_600">#64707D</color>
+    <color name="neutral_700">#40474F</color>
+    <color name="neutral_800">#2D3339</color>
+    <color name="neutral_900">#2B2829</color>
+    <color name="neutral_1000">#121417</color>
+    <color name="neutral_basic_black">#090A0B</color>
+
+    <!-- Success Color -->
+    <color name="success_100">#A4F4E7</color>
+    <color name="success_200">#15B097</color>
+    <color name="success_300">#0B7B69</color>
+
+    <!-- Warning Color -->
+    <color name="warning_100">#F4C790</color>
+    <color name="warning_200">#EDA145</color>
+    <color name="warning_300">#CC7914</color>
+
+    <!-- Error Color -->
+    <color name="error_100">#E4626F</color>
+    <color name="error_200">#C03744</color>
+    <color name="error_300">#8C1823</color>
 </resources>
