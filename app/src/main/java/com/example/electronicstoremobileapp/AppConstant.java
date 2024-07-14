@@ -12,7 +12,8 @@ public class AppConstant {
     public static final String CUSTOMER_ROLE = "CUSTOMER";
     public static final String[] STORAGE_PERMISSIONs = new String[]{
             Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_MEDIA_IMAGES
     };
     public static final int STORAGE_PERMISSIONs_CODE = 1212;
     public static final int MAX_STORAGE_CAPACITY = 100000;
