@@ -56,11 +56,13 @@ public class CustomerOrderAdapter extends BaseAdapter {
 
         TextView txt_OrderId = convertView.findViewById(R.id.txt_OrderId);
         TextView txt_totalPrice = convertView.findViewById(R.id.txt_totalPrice);
+        TextView txt_Status = convertView.findViewById(R.id.txtStatus);
 
         OrderDto order = orderList.get(position);
 
         txt_OrderId.setText("Order '" + order.OrderId+"'");
         txt_totalPrice.setText(order.TotalPrice+"");
+        txt_Status.setText(order.Status);
 
         return convertView;
     }

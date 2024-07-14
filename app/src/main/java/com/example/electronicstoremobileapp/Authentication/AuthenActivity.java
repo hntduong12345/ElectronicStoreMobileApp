@@ -31,6 +31,7 @@ public class AuthenActivity extends AppCompatActivity {
             }
             startActivity(intent);
         }
+        getWindow().setStatusBarColor(getColor(R.color.primary_500));
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_authen);
         fm = getSupportFragmentManager();

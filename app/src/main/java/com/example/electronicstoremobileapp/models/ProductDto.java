@@ -15,7 +15,7 @@ public class ProductDto implements Parcelable {
     @SerializedName("description")
     public String Description;
     @SerializedName("defaultPrice")
-    public double DefaultPrice;
+    public int DefaultPrice;
     @SerializedName("categoryId")
     public String CategoryId;
     @SerializedName("category")
@@ -27,7 +27,7 @@ public class ProductDto implements Parcelable {
     @SerializedName("saleAmount")
     public int SaleAmount;
     @SerializedName("currentPrice")
-    public double CurrentPrice;
+    public int CurrentPrice;
     @SerializedName("isOnSale")
     public boolean IsOnSale;
     @SerializedName("saleEndDate")
@@ -39,13 +39,13 @@ public class ProductDto implements Parcelable {
         ProductId = in.readString();
         ProductName = in.readString();
         Description = in.readString();
-        DefaultPrice = in.readDouble();
+        DefaultPrice = in.readInt();
         CategoryId = in.readString();
         Category = in.readParcelable(CategoryDto.class.getClassLoader());
         Manufacturer = in.readString();
         StorageAmount = in.readInt();
         SaleAmount = in.readInt();
-        CurrentPrice = in.readDouble();
+        CurrentPrice = in.readInt();
         IsOnSale = in.readByte() != 0;
         SaleEndDate = in.readString();
         RelativeUrl = in.readString();
