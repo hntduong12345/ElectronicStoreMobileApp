@@ -52,65 +52,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
-                    <LinearLayout
-                        android:layout_width="412dp"
-                        android:layout_height="117dp"
-                        android:layout_marginTop="16dp"
-                        android:orientation="horizontal"
-                        android:paddingLeft="20dp"
-                        android:weightSum="10"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                        <ImageView
-                            android:id="@+id/imageView12"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:src="@drawable/baseline_location" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="126dp"
-                            android:layout_weight="10"
-                            android:orientation="vertical"
-                            android:paddingLeft="5dp"
-                            android:paddingTop="2dp">
-
-                            <TextView
-                                android:id="@+id/textView22"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Delivery Address"
-                                android:textSize="15dp"
-                                android:textStyle="bold" />
-
-                            <TextView
-                                android:id="@+id/textView23"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="name" />
-
-                            <TextView
-                                android:id="@+id/textView24"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="phone number" />
-
-                            <TextView
-                                android:id="@+id/textView25"
-                                android:layout_width="360dp"
-                                android:layout_height="wrap_content"
-                                android:text="address" />
-                        </LinearLayout>
-                    </LinearLayout>
-
                     <ListView
                         android:id="@+id/listView"
                         android:layout_width="412dp"
-                        android:layout_height="268dp"
-                        android:layout_marginTop="144dp"
+                        android:layout_height="400dp"
+                        android:layout_marginTop="50dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
