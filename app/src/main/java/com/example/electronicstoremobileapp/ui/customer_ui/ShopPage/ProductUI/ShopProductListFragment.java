@@ -96,6 +96,17 @@ public class ShopProductListFragment extends Fragment {
                 }
             }
         });
+
+        binding.imageViewBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment parentFragment = (NavHostFragment) getParentFragment();
+                if (parentFragment != null) {
+                    NavController navController = parentFragment.getNavController();
+                    navController.navigate(R.id.action_shopProductListFragment_to_shopPageFragment);
+                }
+            }
+        });
     }
 
     private void fecthData(){

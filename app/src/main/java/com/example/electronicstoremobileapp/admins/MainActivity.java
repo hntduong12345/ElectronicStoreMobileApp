@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         //NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        //getWindow().setStatusBarColor(getColor(R.color.teal_700));
+        getWindow().setStatusBarColor(getColor(R.color.teal_700));
 
         if (allPermissionsGranted() == false) {
             //requestPermissions();

@@ -127,19 +127,27 @@
         </LinearLayout>
 
         <LinearLayout
-            android:layout_weight="1"
             android:layout_width="50dp"
-            android:orientation="vertical"
-            android:gravity="center_vertical"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="top|end"
+            android:orientation="vertical">
 
-<!--            <ImageView-->
-<!--                android:id="@+id/btnUpdateProduct"-->
-<!--                android:layout_width="30dp"-->
-<!--                android:layout_height="30dp"-->
-<!--                android:src="@drawable/baseline_menu_24">-->
+            <!--            <ImageView-->
+            <!--                android:id="@+id/btnUpdateProduct"-->
+            <!--                android:layout_width="30dp"-->
+            <!--                android:layout_height="30dp"-->
+            <!--                android:src="@drawable/baseline_menu_24">-->
 
-<!--            </ImageView>-->
+            <!--            </ImageView>-->
+
+            <ImageView
+                android:id="@+id/btnDeleteProduct"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/baseline_delete_24">
+
+            </ImageView>
 
             <ImageView
                 android:id="@+id/btnDetail"
@@ -149,13 +157,6 @@
 
             </ImageView>
 
-            <ImageView
-                android:id="@+id/btnDeleteProduct"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/baseline_delete_24">
-
-            </ImageView>
         </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

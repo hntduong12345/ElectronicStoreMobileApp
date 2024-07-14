@@ -61,7 +61,7 @@ public class CustomerCartFragment extends Fragment {
                 .findFragmentById(com.example.electronicstoremobileapp.R.id.nav_host_fragment_customer_cart);
         NavController navController = navHostFragment.getNavController();
         this.navController = navController;
-        navigateToFragment(R.id.cartPageFragment);
+//        navigateToFragment(R.id.cartPageFragment);
         return view;
     }
 

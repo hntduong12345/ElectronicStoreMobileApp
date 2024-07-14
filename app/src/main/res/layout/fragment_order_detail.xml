@@ -211,7 +211,7 @@
 
                         <LinearLayout
                             android:layout_width="378dp"
-                            android:layout_height="19dp"
+                            android:layout_height="32dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="18dp"
@@ -224,10 +224,11 @@
                             <TextView
                                 android:id="@+id/textView33"
                                 android:layout_width="103dp"
-                                android:layout_height="wrap_content"
+                                android:layout_height="match_parent"
                                 android:layout_weight="1"
                                 android:text="Total"
-                                android:textStyle="bold"/>
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
 
                             <TextView
                                 android:id="@+id/txt_totalAmount"
@@ -236,6 +237,7 @@
                                 android:layout_weight="1"
                                 android:text="total price"
                                 android:textAlignment="textEnd"
+                                android:textSize="20sp"
                                 android:textStyle="bold" />
                         </LinearLayout>
                     </androidx.constraintlayout.widget.ConstraintLayout>

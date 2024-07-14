@@ -61,6 +61,7 @@
         android:layout_height="52dp"
         android:layout_marginStart="45dp"
         android:layout_marginTop="31dp"
+        android:backgroundTint="@color/primary_500"
         android:text="Login"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextPasswordSI" />
