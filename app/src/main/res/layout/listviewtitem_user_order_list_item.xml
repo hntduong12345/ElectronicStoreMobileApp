@@ -36,52 +36,22 @@
                 android:weightSum="3">
 
                 <TextView
-                    android:id="@+id/txt_ProductName"
+                    android:id="@+id/txt_OrderId"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="product name" />
+                    android:text="order id name" />
 
                 <TextView
-                    android:id="@+id/txt_Quantity"
+                    android:id="@+id/txt_totalPrice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="quantity"
-                    android:textAlignment="viewEnd" />
-
-                <TextView
-                    android:id="@+id/txt_singlePrice"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="price of this product"
+                    android:text="total price"
                     android:textAlignment="viewEnd"
                     android:textColor="#FF5722" />
+
             </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="2">
-
-            <TextView
-                android:id="@+id/txt_totalQuantity"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="quantity in order" />
-
-            <TextView
-                android:id="@+id/txt_totalPrice"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="total price"
-                android:textAlignment="viewEnd"
-                android:textColor="#FF5722" />
         </LinearLayout>
 
     </LinearLayout>

@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -101,6 +102,21 @@ public class UserPageFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        binding.btnMyOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                NavHostFragment parentFragment = (NavHostFragment) getParentFragment();
+                if (parentFragment != null) {
+                    NavController navController = parentFragment.getNavController();
+                    navController.navigate(R.id.action_userPageFragment_to_userOrdersList);
+                }
+            }
+        });
     }
 
     private void navigateToFragment(int fragmentId) {
